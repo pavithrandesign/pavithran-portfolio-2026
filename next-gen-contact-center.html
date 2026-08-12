@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Next Gen Contact Center Web App — Pavithran P</title>
+<meta name="description" content="Unifying two legacy platforms into one AI-orchestrated desktop for 35,000+ support representatives. A case study in research-led enterprise UX.">
+<meta name="view-transition" content="same-origin">
+<link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+<link rel="stylesheet" href="assets/css/styles.css">
+<style>
+  /* Local to this case study only — not part of the shared stylesheet.
+     Matches the icon-bullet / inline-persona treatment used in the
+     Reimagining Employee Center case study. */
+
+  /* Before/After — icon bullets instead of the shared dash marker. */
+  .ba-card ul.ba-icon-list li{padding-left:0;display:flex;align-items:flex-start;gap:var(--sp-3);}
+  .ba-card ul.ba-icon-list li::before{content:none;}
+  .ba-icon{flex-shrink:0;margin-top:2px;color:var(--text-primary);}
+  .ba-card.ba-after .ba-icon{color:var(--white);}
+  .ba-icon svg{width:16px;height:16px;display:block;}
+
+  /* Personas — initial circle inline with the name instead of stacked above it. */
+  .persona-head{display:flex;align-items:center;gap:var(--sp-3);margin-bottom:var(--sp-3);}
+  .persona-head .persona-initial{margin-bottom:0;flex-shrink:0;}
+  .persona-head h4{margin:0;}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-nav">
+  <a href="index.html" class="nav-back" aria-label="Back to home">
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    Back
+  </a>
+  <span class="nav-case-name">Next Gen Contact Center Web App</span>
+</header>
+
+<main id="main">
+
+  <!-- 01 — Cover -->
+  <section class="cs-hero">
+    <p class="eyebrow">Case Study — Research &amp; Product Design</p>
+    <h1 style="view-transition-name: cs-next-gen-contact-center-title;">Next Gen Contact Center Web App</h1>
+    <p class="cs-dek">Unifying two legacy platforms into one AI-orchestrated desktop for 35,000+ support representatives.</p>
+    <div class="cs-meta">
+      <div class="cs-meta-item">
+        <p class="eyebrow">Sector</p>
+        <p>Telecom · Conversational AI · Enterprise Customer Care</p>
+      </div>
+      <div class="cs-meta-item">
+        <p class="eyebrow">My Role</p>
+        <p>Research, UX strategy, and end-to-end ownership of the Service Change modernization</p>
+      </div>
+      <div class="cs-meta-item">
+        <p class="eyebrow">Context</p>
+        <p>A major U.S. telecom carrier. Details anonymized.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="cs-cover" style="view-transition-name: cs-next-gen-contact-center-media;">
+    <img src="assets/images/case-studies/next-gen-contact-center/cover.png" alt="Next Gen Contact Center Web App — unified agent desktop preview" style="width:100%; border-radius: var(--r-xl); display:block;">
+  </div>
+
+  <!-- 02 — Overview -->
+  <section class="cs-section">
+    <div class="cs-section-inner">
+      <div class="cs-section-label"><p class="eyebrow">01 — Overview</p></div>
+      <div>
+        <h2 class="cs-headline">A large-scale, ongoing modernization program</h2>
+        <div class="cs-stat-row cs-reveal">
+          <div class="cs-stat"><div class="stat-num" data-count-to="35" data-suffix="K+">0K+</div><div class="stat-label">Support representatives across voice, chat &amp; social</div></div>
+          <div class="cs-stat"><div class="stat-num" data-count-to="100" data-suffix="M+">0M+</div><div class="stat-label">Customers served across mobile &amp; home internet</div></div>
+          <div class="cs-stat"><div class="stat-num" data-count-to="2" data-suffix="">0</div><div class="stat-label">Legacy platforms being unified into one</div></div>
+        </div>
+
+        <div class="cs-recs-grid cs-reveal" style="margin-top: var(--sp-10);">
+          <div class="recs-col">
+            <h4>My role</h4>
+            <ul>
+              <li>Shaped research goals and discussion guides for field studies</li>
+              <li>Co-led synthesis of call-volume data and interviews into personas &amp; journey maps</li>
+              <li>Contributed to early-stage concept design for the unified experience</li>
+              <li>Independently owned and shipped a modernization of the Service Change flow</li>
+            </ul>
+          </div>
+          <div class="recs-col">
+            <h4>What this case study covers</h4>
+            <ul>
+              <li>The legacy problem, and a shipped fix I drove end-to-end</li>
+              <li>The research behind a bigger unification vision</li>
+              <li>Concepts, field validation, and where the program stood when I left</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 — The Problem -->
+  <section class="cs-section">
+    <div class="cs-section-inner">
+      <div class="cs-section-label"><p class="eyebrow">02 — The Problem</p></div>
+      <div>
+        <h2 class="cs-headline">Reps stitched two disconnected systems together, live on every call</h2>
+        <div class="cs-numbered-list cs-reveal">
+          <div class="numbered-item">
+            <span class="num">01</span>
+            <div>
+              <h4>Two platforms, one job</h4>
+              <p>One legacy tool for mobile &amp; wireless, a completely separate one for home internet — with different logic, different UI, different data.</p>
+            </div>
+          </div>
+          <div class="numbered-item">
+            <span class="num">02</span>
+            <div>
+              <h4>Mentally stitched together</h4>
+              <p>Resolving a single customer issue meant tabbing between systems and reconciling what each one showed.</p>
+            </div>
+          </div>
+          <div class="numbered-item">
+            <span class="num">03</span>
+            <div>
+              <h4>The cost showed up everywhere</h4>
+              <p>Longer calls, inconsistent answers depending on which rep and which tool, and a steep learning curve for new hires.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 — Proof of Execution -->
+  <section class="cs-section">
+    <div class="cs-section-inner">
+      <div class="cs-section-label"><p class="eyebrow">03 — Proof of Execution</p></div>
+      <div>
+        <h2 class="cs-headline">Service Change Modernization — a fix I helped ship</h2>
+        <div class="cs-body cs-reveal">
+          <p>For two years I owned the troubleshooting &amp; service-change area as ongoing BAU work. This was the first piece I helped take from legacy to modern — and it shipped.</p>
+        </div>
+
+        <div class="cs-before-after cs-reveal">
+          <div class="ba-card">
+            <p class="eyebrow">Before</p>
+            <ul class="ba-icon-list">
+              <li><span class="ba-icon"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="4" width="12" height="12" rx="1.5" stroke="currentColor" stroke-width="1.8"/><rect x="8" y="8" width="12" height="12" rx="1.5" stroke="currentColor" stroke-width="1.8"/></svg></span><span>Service changes handled inside up to 6 stacked modal windows</span></li>
+              <li><span class="ba-icon"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.8"/><path d="M4 4l16 16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span><span>Plan capping details hidden behind extra clicks</span></li>
+              <li><span class="ba-icon"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.8"/><rect x="14" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.8"/><rect x="3" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.8"/><rect x="14" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.8"/></svg></span><span>Dense, cluttered layout — high cognitive load</span></li>
+              <li><span class="ba-icon"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 8a6 6 0 10-12 0c0 7-3 9-3 9h18s-3-2-3-9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M13.7 21a2 2 0 01-3.4 0" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M3 3l18 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span><span>No visual feedback for alerts or errors</span></li>
+            </ul>
+          </div>
+          <div class="ba-card ba-after">
+            <p class="eyebrow">After</p>
+            <ul class="ba-icon-list">
+              <li><span class="ba-icon"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 3h12a1 1 0 011 1v17l-7-4-7 4V4a1 1 0 011-1z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></span><span>Service Change as its own dedicated item in the primary menu</span></li>
+              <li><span class="ba-icon"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.8"/></svg></span><span>A persistent panel showing existing service info at a glance</span></li>
+              <li><span class="ba-icon"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M8.5 12.5l2.4 2.4L16 9.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>One guided center panel to choose and confirm the best plan</span></li>
+              <li><span class="ba-icon"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 5h16a1 1 0 011 1v10a1 1 0 01-1 1H9l-5 4V6a1 1 0 011-1z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></span><span>A persistent assist panel reps can lean on at any time</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="cs-stat-row cs-reveal" style="margin-top: var(--sp-10);">
+          <div class="cs-stat"><div class="stat-num" data-count-to="28" data-suffix="K">0K</div><div class="stat-label">Reps actively using the redesigned flow</div></div>
+          <div class="cs-stat"><div class="stat-num" data-count-to="230" data-suffix="K">0K</div><div class="stat-label">Transactions processed since launch</div></div>
+          <div class="cs-stat"><div class="stat-num" data-count-to="30" data-suffix="%">0%</div><div class="stat-label">Fewer clicks to complete a service change</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 — Setting the Bigger Direction -->
+  <section class="cs-section">
+    <div class="cs-section-inner">
+      <div class="cs-section-label"><p class="eyebrow">04 — Setting Direction</p></div>
+      <div>
+        <h2 class="cs-headline">Leadership wanted flashy AI. The data pointed somewhere else.</h2>
+        <div class="cs-stat-row cs-reveal" style="grid-template-columns: 1fr;">
+          <div class="cs-stat"><div class="stat-num" data-count-to="1" data-suffix="M+">0M+</div><div class="stat-label">Calls tied to troubleshooting — the single largest volume driver in the entire call center, ahead of every other category.</div></div>
+        </div>
+        <div class="cs-body cs-reveal" style="margin-top: var(--sp-8);">
+          <p>I used this to make the case internally: fix the foundation before chasing new AI capabilities.</p>
+          <p><strong>The unlock —</strong> We mapped the troubleshooting steps of both legacy platforms side by side and found the underlying logic was about 90% identical, despite completely different tools. That single finding justified unifying the two platforms rather than patching each one separately.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 — Research Approach -->
+  <section class="cs-section">
+    <div class="cs-section-inner">
+      <div class="cs-section-label"><p class="eyebrow">05 — Research Approach</p></div>
+      <div>
+        <h2 class="cs-headline">An ongoing research practice, not a one-off study</h2>
+        <div class="cs-numbered-list cs-reveal">
+          <div class="numbered-item"><span class="num">01</span><div><h4>Interactive step-mapping</h4><p>Compared the two legacy platforms' troubleshooting flows step by step to find shared logic.</p></div></div>
+          <div class="numbered-item"><span class="num">02</span><div><h4>1:1 rep interviews</h4><p>Recurring voice-of-rep interview program feeding directly into design decisions.</p></div></div>
+          <div class="numbered-item"><span class="num">03</span><div><h4>Call listening</h4><p>5–15 recorded support calls reviewed every month across both platforms.</p></div></div>
+          <div class="numbered-item"><span class="num">04</span><div><h4>Quarterly field visits</h4><p>In-person observation of reps on the floor, done in batches every quarter.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 — Research Synthesis -->
+  <section class="cs-section">
+    <div class="cs-section-inner">
+      <div class="cs-section-label"><p class="eyebrow">06 — Research Synthesis</p></div>
+      <div>
+        <h2 class="cs-headline">Using AI to synthesize research at speed — then validating it by hand</h2>
+        <div class="cs-numbered-list cs-reveal">
+          <div class="numbered-item"><span class="num">01</span><div><h4>Data ingestion</h4><p>Call transcripts and interview recordings from months of recurring research.</p></div></div>
+          <div class="numbered-item"><span class="num">02</span><div><h4>AI-assisted processing</h4><p>An AI tool clustered customer intents and surfaced emotional friction points at a scale manual review couldn't match.</p></div></div>
+          <div class="numbered-item"><span class="num">03</span><div><h4>Synthesized output</h4><p>Data-backed personas, a day-in-the-life view, and a 6-stage journey map.</p></div></div>
+        </div>
+        <div class="cs-closing-note cs-reveal">The AI pass got us a fast first draft. Every persona and journey map was then checked and enriched against real interview notes and quarterly field-visit observations before anyone treated it as fact.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 — Personas -->
+  <section class="cs-section">
+    <div class="cs-section-inner">
+      <div class="cs-section-label"><p class="eyebrow">07 — Personas</p></div>
+      <div>
+        <h2 class="cs-headline">Three personas built for a real 10 / 80 / 10 customer base</h2>
+        <div class="cs-persona-grid cs-reveal">
+          <div class="persona-card">
+            <div class="persona-head"><div class="persona-initial">J</div><h4>Jesse</h4></div>
+            <p class="persona-tag">Minimal Customer</p>
+            <p>One mobile account, one line, for one person.</p>
+          </div>
+          <div class="persona-card">
+            <div class="persona-head"><div class="persona-initial">S</div><h4>Sidney</h4></div>
+            <p class="persona-tag">Average Customer</p>
+            <p>A combined mobile + home account, 3 lines for 2 people.</p>
+          </div>
+          <div class="persona-card">
+            <div class="persona-head"><div class="persona-initial">A</div><h4>Alex</h4></div>
+            <p class="persona-tag">Maximal Customer</p>
+            <p>A combined mobile + home account, 8 lines for 6 people.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 09 — Concept Exploration -->
+  <section class="cs-section">
+    <div class="cs-section-inner">
+      <div class="cs-section-label"><p class="eyebrow">08 — Concept Exploration</p></div>
+      <div>
+        <h2 class="cs-headline">Three concept directions, three different bets on AI vs. rep control</h2>
+        <div class="cs-recs-grid cs-reveal" style="grid-template-columns: repeat(3, 1fr);">
+          <div class="recs-col">
+            <h4>Canvas playground</h4>
+            <ul>
+              <li>A single infinite canvas</li>
+              <li>AI-generated contextual cards</li>
+              <li>Highly customizable, but less guided</li>
+            </ul>
+          </div>
+          <div class="recs-col">
+            <h4>The agentic way</h4>
+            <ul>
+              <li>AI proactively works the problem</li>
+              <li>Transparent, step-by-step AI reasoning</li>
+              <li>Powerful, but asks reps to trust AI more</li>
+            </ul>
+          </div>
+          <div class="recs-col">
+            <h4>Bi-modal framework</h4>
+            <ul>
+              <li>Guided flow + a flexible workspace</li>
+              <li>Progressive disclosure of detail</li>
+              <li>AI as a team player, not the driver</li>
+            </ul>
+          </div>
+        </div>
+        <div class="cs-closing-note cs-reveal">We carried the bi-modal direction forward into detailed design and field testing.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 — Grounding the Design -->
+  <section class="cs-section">
+    <div class="cs-section-inner">
+      <div class="cs-section-label"><p class="eyebrow">09 — Grounding the Design</p></div>
+      <div>
+        <h2 class="cs-headline">Hero scenarios kept concepts tied to real, high-frequency calls</h2>
+        <div class="cs-persona-grid cs-reveal">
+          <div class="persona-card">
+            <p class="persona-tag">Scenario 01</p>
+            <h4>Bill High</h4>
+            <p>A customer reports a spike in spam calls despite active filters — the rep walks them through reconfiguring call-filter settings live.</p>
+          </div>
+          <div class="persona-card">
+            <p class="persona-tag">Scenario 02</p>
+            <h4>Disconnect &amp; Autopay</h4>
+            <p>A customer needs to close one line, settle a final balance, and move a second account onto autopay — spanning two separate systems today.</p>
+          </div>
+          <div class="persona-card">
+            <p class="persona-tag">Scenario 03</p>
+            <h4>Payment</h4>
+            <p>A customer negotiates a later payment date and needs autopay paused so it doesn't withdraw the full balance in the meantime.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11 — Bringing It to Life -->
+  <section class="cs-section">
+    <div class="cs-section-inner">
+      <div class="cs-section-label"><p class="eyebrow">10 — Bringing It to Life</p></div>
+      <div>
+        <h2 class="cs-headline">Storyboarding the vision before a single screen was built</h2>
+        <div class="cs-numbered-list cs-reveal">
+          <div class="numbered-item"><span class="num">01</span><div><h4>The trigger</h4><p>A customer notices their bill jumped and reaches for the phone, frustrated.</p></div></div>
+          <div class="numbered-item"><span class="num">02</span><div><h4>AI greets &amp; listens</h4><p>An AI assistant greets the customer immediately and starts understanding the issue.</p></div></div>
+          <div class="numbered-item"><span class="num">03</span><div><h4>Seamless handover</h4><p>The assistant hands off to a rep with full context already loaded — no re-explaining.</p></div></div>
+          <div class="numbered-item"><span class="num">04</span><div><h4>Rep resolves</h4><p>The rep picks up mid-conversation and resolves the issue with the context already in view.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12 — Field Validation -->
+  <section class="cs-section">
+    <div class="cs-section-inner">
+      <div class="cs-section-label"><p class="eyebrow">11 — Field Validation</p></div>
+      <div>
+        <h2 class="cs-headline">Testing the concept with the reps who'd actually use it</h2>
+        <div class="cs-body cs-reveal">
+          <p><strong>Objective —</strong> Validate the unified desktop design against real rep feedback, and understand rep behaviors and expectations deeply enough to optimize the experience.</p>
+        </div>
+        <div class="cs-recs-grid cs-reveal">
+          <div class="recs-col">
+            <h4>What we tested for</h4>
+            <ul>
+              <li>Comprehension — do reps understand the new UI and terms?</li>
+              <li>Sufficiency — is on-screen info enough to act, without switching tools?</li>
+              <li>Utility — which parts actually help reps do their job?</li>
+              <li>AI behavior — does AI content beside a live chat confuse or mislead?</li>
+              <li>Multitasking — what do reps need to juggle several chats at once?</li>
+            </ul>
+          </div>
+          <div class="recs-col">
+            <h4>Methodology</h4>
+            <ul>
+              <li>9 reps tested — 5 on chat, 4 on voice</li>
+              <li>20–30 minute 1-on-1 sessions</li>
+              <li>Rapid flash testing and scenario-based validation, rather than one long deep interview — to see more reps and cover more scenarios</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 13 — Key Findings -->
+  <section class="cs-section">
+    <div class="cs-section-inner">
+      <div class="cs-section-label"><p class="eyebrow">12 — Key Findings</p></div>
+      <div>
+        <h2 class="cs-headline">What reps told us, in their own words</h2>
+        <div class="cs-quote-grid cs-reveal">
+          <div class="quote-card">
+            <span class="quote-mark">&ldquo;</span>
+            <blockquote>Previously we needed to open the digital and check for all the things… now it has been added. So it is easy to check and we can easily convey to the customer.</blockquote>
+            <p class="quote-cap">One screen beats six tabs</p>
+          </div>
+          <div class="quote-card">
+            <span class="quote-mark">&ldquo;</span>
+            <blockquote>If AI put the third statement that will go a different way only… it might mislead the communication. If it's getting collapsed, then it's the best thing.</blockquote>
+            <p class="quote-cap">Keep AI results out of the live chat</p>
+          </div>
+          <div class="quote-card">
+            <span class="quote-mark">&ldquo;</span>
+            <blockquote>This one, "senior," means maybe like… five years — read as tenure, not a senior-citizen flag.</blockquote>
+            <p class="quote-cap">Vague labels get misread</p>
+          </div>
+          <div class="quote-card">
+            <span class="quote-mark">&ldquo;</span>
+            <blockquote>Mostly we use it only to check the customer discounts… it's not useful when required upfront.</blockquote>
+            <p class="quote-cap">Surface details on demand, not upfront</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 14 — Recommendations -->
+  <section class="cs-section">
+    <div class="cs-section-inner">
+      <div class="cs-section-label"><p class="eyebrow">13 — Recommendations</p></div>
+      <div>
+        <h2 class="cs-headline">What I handed back to the design &amp; platform teams</h2>
+        <div class="cs-recs-grid cs-reveal">
+          <div class="recs-col">
+            <h4>For chat</h4>
+            <ul>
+              <li>Keep chat history &amp; identifiers one click away when juggling multiple conversations</li>
+              <li>Surface chat timing (wait time, total duration) reps were tracking manually</li>
+              <li>Move AI-generated suggestions out of the live transcript into a separate panel</li>
+              <li>Design for dual-monitor workflows — reps strongly preferred spreading tools across two screens</li>
+            </ul>
+          </div>
+          <div class="recs-col">
+            <h4>For voice</h4>
+            <ul>
+              <li>Replace ambiguous labels (like a bare "senior" tag) with explicit, unambiguous language</li>
+              <li>Give reps one-click access to line-level billing detail during live calls</li>
+              <li>Show network/outage status inline instead of requiring a separate lookup</li>
+              <li>Surface customer insights &amp; relevant offers proactively, not buried in a tab</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 15 — The Bigger Vision -->
+  <section class="cs-section">
+    <div class="cs-section-inner">
+      <div class="cs-section-label"><p class="eyebrow">14 — The Bigger Vision</p></div>
+      <div>
+        <h2 class="cs-headline">A unified, AI-orchestrated desktop for every rep</h2>
+        <div class="cs-vision-band cs-reveal">
+          <span class="vision-flag">Projected — not yet delivered</span>
+          <p class="lead">A single system that centralizes every customer interaction, so reps spend less time hunting for information and more time helping the customer in front of them.</p>
+          <div class="cs-stat-row">
+            <div class="cs-stat"><div class="stat-num" data-count-to="3.18" data-suffix="M">$0M</div><div class="stat-label" style="color: var(--grey-500);">In funding secured for year one</div></div>
+            <div class="cs-stat"><div class="stat-num" data-count-to="15.8" data-suffix="M">$0M</div><div class="stat-label" style="color: var(--grey-500);">Projected annual benefit</div></div>
+            <div class="cs-stat"><div class="stat-num" data-count-to="22" data-suffix="s">~0s</div><div class="stat-label" style="color: var(--grey-500);">Targeted reduction in average handle time</div></div>
+          </div>
+        </div>
+        <p class="cs-closing-note cs-reveal">AHT target breakdown: ~15s from core AI assistance · ~5s from a dynamic, guided UI · ~2s from raw performance improvements.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 16 — Honest Status -->
+  <section class="cs-section">
+    <div class="cs-section-inner">
+      <div class="cs-section-label"><p class="eyebrow">15 — Honest Status</p></div>
+      <div>
+        <h2 class="cs-headline">Where the program stood when I left</h2>
+        <div class="cs-timeline cs-reveal">
+          <div class="timeline-item"><p class="t-when">~2 yrs, BAU</p><p>Owned troubleshooting &amp; service-change work; shipped the Service Change Modernization redesign.</p></div>
+          <div class="timeline-item"><p class="t-when">Early prior year</p><p>The broader unification vision kicked off, aiming to merge both legacy platforms into one.</p></div>
+          <div class="timeline-item"><p class="t-when">This year</p><p>A platform engineering team took the vision forward with dedicated funding and a formal build.</p></div>
+          <div class="timeline-item"><p class="t-when">Pilot pushed</p><p>The first pilot launch, originally targeted for last summer, was pushed past that date.</p></div>
+        </div>
+        <p class="cs-closing-note cs-reveal">My last day was the end of July, before the pilot launched. Everything past the Service Change work reflects research, concepts, and design contributions, not delivered production results.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 17 — Reflection -->
+  <section class="cs-section">
+    <div class="cs-section-inner">
+      <div class="cs-section-label"><p class="eyebrow">16 — Reflection</p></div>
+      <div>
+        <h2 class="cs-headline">What this project reinforced for me</h2>
+        <div class="cs-reflect-grid cs-reveal">
+          <div class="reflect-card">
+            <p class="num">01</p>
+            <h4>Data beats instinct</h4>
+            <p>The loudest opinion in the room isn't always the right priority — call-volume data settled a real disagreement about where to start.</p>
+          </div>
+          <div class="reflect-card">
+            <p class="num">02</p>
+            <h4>AI needs a human check</h4>
+            <p>AI-assisted synthesis is genuinely fast, but every output still needed validation against real interviews and field visits before I trusted it.</p>
+          </div>
+          <div class="reflect-card">
+            <p class="num">03</p>
+            <h4>Simplifying is its own kind of design</h4>
+            <p>Untangling two years of legacy complexity into one clear flow was as hard, and as valuable, as inventing something new.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 18 — Closing -->
+  <section class="cs-closing">
+    <p class="eyebrow" style="margin-bottom: var(--sp-5);">Thank you</p>
+    <h2>Happy to go deeper on the research, the design decisions, or the tooling behind any of this.</h2>
+    <p>Reach out and I'll walk you through it.</p>
+    <span class="magnetic-wrap">
+      <a class="btn btn-primary" data-magnetic href="index.html#contact">Get in touch</a>
+    </span>
+  </section>
+
+  <!-- Next case study teaser -->
+  <div class="cs-next">
+    <a class="cs-next-card" href="reimagining-employee-center.html" style="text-decoration:none;">
+      <p class="eyebrow">Next</p>
+      <h3>Reimagining Employee Center</h3>
+      <p>Transforming an app-centric employee center into an information-centric, mobile-first experience.</p>
+    </a>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <span>&copy; <span id="year"></span> Pavithran P.</span>
+  <div class="footer-links">
+    <a href="https://www.linkedin.com/in/pavithrandesigns/" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="mailto:ppavithran@outlook.com">Email</a>
+    <a class="back-to-top" href="#main">Back to top ↑</a>
+  </div>
+</footer>
+
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/case-study.js"></script>
+</body>
+</html>

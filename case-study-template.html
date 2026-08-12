@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<!--
+  ============================================================================
+  CASE STUDY TEMPLATE — duplicate this file to add a new case study.
+
+  HOW TO USE:
+  1. Copy this file, rename it to your case study's slug, e.g. "employee-center-reimagine.html"
+  2. Replace every [BRACKETED] placeholder with real content.
+  3. Delete any <section> block you don't need (each is self-contained).
+     Duplicate any numbered-list / stat-row / quote-card / persona-card block
+     to add more items — they don't depend on JS, just markup.
+  4. Swap the .placeholder-block <div>s for real <img> tags once you have visuals:
+       <img src="assets/images/case-studies/[slug]/cover.jpg" alt="[description]">
+  5. Add this case study to the homepage grid by editing the `tilesData` array
+     at the top of assets/js/main.js — duplicate the second-case-study
+     placeholder entry and point it at this new file.
+  6. Nothing else needs to change. Nav, cursor, fonts, and all interactions
+     are shared via assets/css/styles.css + assets/js/main.js + case-study.js.
+  7. The view-transition-name values on .cs-cover and .cs-hero h1 below use a
+     [slug] placeholder — replace [slug] with this case study's unique slug
+     (matching the homepage card) so the morph transition doesn't collide
+     with other case studies.
+  ============================================================================
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>[Case Study Title] — Pavithran P</title>
+<meta name="description" content="[One-sentence summary for search & social previews.]">
+<meta name="view-transition" content="same-origin">
+<link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+<link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-nav">
+  <a href="index.html" class="nav-back" aria-label="Back to home">
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    Back
+  </a>
+  <span class="nav-case-name">[Case Study Title]</span>
+</header>
+
+<main id="main">
+
+  <!-- COVER -->
+  <section class="cs-hero">
+    <p class="eyebrow">Case Study — [Discipline, e.g. Product Design]</p>
+    <h1 style="view-transition-name: cs-[slug]-title;">[Case Study Title]</h1>
+    <p class="cs-dek">[One or two sentences that summarize the problem and outcome.]</p>
+    <div class="cs-meta">
+      <div class="cs-meta-item"><p class="eyebrow">Sector</p><p>[Industry / domain]</p></div>
+      <div class="cs-meta-item"><p class="eyebrow">My Role</p><p>[What you owned]</p></div>
+      <div class="cs-meta-item"><p class="eyebrow">Context</p><p>[Company / confidentiality note]</p></div>
+    </div>
+  </section>
+
+  <div class="cs-cover" style="view-transition-name: cs-[slug]-media;">
+    <div class="placeholder-block"><span class="placeholder-tag">Image coming soon</span></div>
+  </div>
+
+  <!-- SECTION: Overview -->
+  <section class="cs-section">
+    <div class="cs-section-inner">
+      <div class="cs-section-label"><p class="eyebrow">01 — Overview</p></div>
+      <div>
+        <h2 class="cs-headline">[Section headline — this text mask-reveals on scroll]</h2>
+        <div class="cs-stat-row cs-reveal">
+          <div class="cs-stat"><div class="stat-num" data-count-to="0" data-suffix="">0</div><div class="stat-label">[Stat label]</div></div>
+          <div class="cs-stat"><div class="stat-num" data-count-to="0" data-suffix="">0</div><div class="stat-label">[Stat label]</div></div>
+          <div class="cs-stat"><div class="stat-num" data-count-to="0" data-suffix="">0</div><div class="stat-label">[Stat label]</div></div>
+        </div>
+        <div class="cs-body cs-reveal" style="margin-top: var(--sp-8);">
+          <p>[Body copy.]</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION: The Problem -->
+  <section class="cs-section">
+    <div class="cs-section-inner">
+      <div class="cs-section-label"><p class="eyebrow">02 — The Problem</p></div>
+      <div>
+        <h2 class="cs-headline">[Problem headline]</h2>
+        <div class="cs-numbered-list cs-reveal">
+          <div class="numbered-item"><span class="num">01</span><div><h4>[Point]</h4><p>[Detail]</p></div></div>
+          <div class="numbered-item"><span class="num">02</span><div><h4>[Point]</h4><p>[Detail]</p></div></div>
+          <div class="numbered-item"><span class="num">03</span><div><h4>[Point]</h4><p>[Detail]</p></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION: Before / After -->
+  <section class="cs-section">
+    <div class="cs-section-inner">
+      <div class="cs-section-label"><p class="eyebrow">03 — The Fix</p></div>
+      <div>
+        <h2 class="cs-headline">[What shipped]</h2>
+        <div class="cs-before-after cs-reveal">
+          <div class="ba-card"><p class="eyebrow">Before</p><ul><li>[Point]</li><li>[Point]</li></ul></div>
+          <div class="ba-card ba-after"><p class="eyebrow">After</p><ul><li>[Point]</li><li>[Point]</li></ul></div>
+        </div>
+        <div class="cs-stat-row cs-reveal" style="margin-top: var(--sp-10);">
+          <div class="cs-stat"><div class="stat-num" data-count-to="0" data-suffix="">0</div><div class="stat-label">[Impact metric]</div></div>
+          <div class="cs-stat"><div class="stat-num" data-count-to="0" data-suffix="">0</div><div class="stat-label">[Impact metric]</div></div>
+          <div class="cs-stat"><div class="stat-num" data-count-to="0" data-suffix="">0</div><div class="stat-label">[Impact metric]</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION: Personas (duplicate .persona-card for more) -->
+  <section class="cs-section">
+    <div class="cs-section-inner">
+      <div class="cs-section-label"><p class="eyebrow">04 — Research</p></div>
+      <div>
+        <h2 class="cs-headline">[Research / persona headline]</h2>
+        <div class="cs-persona-grid cs-reveal">
+          <div class="persona-card"><div class="persona-initial">A</div><h4>[Name]</h4><p class="persona-tag">[Segment]</p><p>[Description]</p></div>
+          <div class="persona-card"><div class="persona-initial">B</div><h4>[Name]</h4><p class="persona-tag">[Segment]</p><p>[Description]</p></div>
+          <div class="persona-card"><div class="persona-initial">C</div><h4>[Name]</h4><p class="persona-tag">[Segment]</p><p>[Description]</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION: Quotes (duplicate .quote-card for more) -->
+  <section class="cs-section">
+    <div class="cs-section-inner">
+      <div class="cs-section-label"><p class="eyebrow">05 — Findings</p></div>
+      <div>
+        <h2 class="cs-headline">[What you learned]</h2>
+        <div class="cs-quote-grid cs-reveal">
+          <div class="quote-card"><span class="quote-mark">&ldquo;</span><blockquote>[Quote]</blockquote><p class="quote-cap">[Takeaway]</p></div>
+          <div class="quote-card"><span class="quote-mark">&ldquo;</span><blockquote>[Quote]</blockquote><p class="quote-cap">[Takeaway]</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION: Recommendations (2 columns) -->
+  <section class="cs-section">
+    <div class="cs-section-inner">
+      <div class="cs-section-label"><p class="eyebrow">06 — Recommendations</p></div>
+      <div>
+        <h2 class="cs-headline">[What you handed off]</h2>
+        <div class="cs-recs-grid cs-reveal">
+          <div class="recs-col"><h4>[Column A]</h4><ul><li>[Point]</li><li>[Point]</li></ul></div>
+          <div class="recs-col"><h4>[Column B]</h4><ul><li>[Point]</li><li>[Point]</li></ul></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION: Vision / Impact band -->
+  <section class="cs-section">
+    <div class="cs-section-inner">
+      <div class="cs-section-label"><p class="eyebrow">07 — Vision</p></div>
+      <div>
+        <h2 class="cs-headline">[Bigger picture headline]</h2>
+        <div class="cs-vision-band cs-reveal">
+          <span class="vision-flag">[Status flag, e.g. Shipped / Projected]</span>
+          <p class="lead">[One or two sentences on the broader impact.]</p>
+          <div class="cs-stat-row">
+            <div class="cs-stat"><div class="stat-num" data-count-to="0" data-suffix="">0</div><div class="stat-label" style="color: var(--grey-500);">[Metric]</div></div>
+            <div class="cs-stat"><div class="stat-num" data-count-to="0" data-suffix="">0</div><div class="stat-label" style="color: var(--grey-500);">[Metric]</div></div>
+            <div class="cs-stat"><div class="stat-num" data-count-to="0" data-suffix="">0</div><div class="stat-label" style="color: var(--grey-500);">[Metric]</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION: Reflection -->
+  <section class="cs-section">
+    <div class="cs-section-inner">
+      <div class="cs-section-label"><p class="eyebrow">08 — Reflection</p></div>
+      <div>
+        <h2 class="cs-headline">[What this reinforced for you]</h2>
+        <div class="cs-reflect-grid cs-reveal">
+          <div class="reflect-card"><p class="num">01</p><h4>[Lesson]</h4><p>[Detail]</p></div>
+          <div class="reflect-card"><p class="num">02</p><h4>[Lesson]</h4><p>[Detail]</p></div>
+          <div class="reflect-card"><p class="num">03</p><h4>[Lesson]</h4><p>[Detail]</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLOSING -->
+  <section class="cs-closing">
+    <p class="eyebrow" style="margin-bottom: var(--sp-5);">Thank you</p>
+    <h2>[Closing line inviting a conversation.]</h2>
+    <p>[Optional supporting sentence.]</p>
+    <span class="magnetic-wrap">
+      <a class="btn btn-primary" data-magnetic href="index.html#contact">Get in touch</a>
+    </span>
+  </section>
+
+  <!-- Next case study teaser — point this at whatever comes after this one -->
+  <div class="cs-next">
+    <div class="cs-next-card">
+      <p class="eyebrow">Next</p>
+      <h3>[Next Case Study Title]</h3>
+      <p>[Status — e.g. "Coming soon" or link it once it's live.]</p>
+    </div>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <span>&copy; <span id="year"></span> Pavithran P.</span>
+  <div class="footer-links">
+    <a href="https://www.linkedin.com/in/pavithrandesigns/" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="mailto:ppavithran@outlook.com">Email</a>
+    <a class="back-to-top" href="#main">Back to top ↑</a>
+  </div>
+</footer>
+
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/case-study.js"></script>
+</body>
+</html>

@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reimagining Employee Center — Pavithran P</title>
+<meta name="description" content="Transforming an app-centric employee center into an information-centric, mobile-first experience for a global enterprise technology company.">
+<meta name="view-transition" content="same-origin">
+<link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+<link rel="stylesheet" href="assets/css/styles.css">
+<style>
+  /* Local to this case study only — not part of the shared stylesheet. */
+
+  .cs-mockup-pair{display:flex;align-items:flex-end;justify-content:center;gap:var(--sp-5);flex-wrap:nowrap;}
+  .cs-mockup-pair img{width:auto;height:clamp(260px, 32vw, 480px);max-width:100%;}
+  @media (max-width:800px){
+    .cs-mockup-pair{flex-direction:column;align-items:center;}
+    .cs-mockup-pair img{height:auto;width:min(100%, 360px);}
+  }
+
+  /* Carousel — used by Wireframes / Visual Design, since the shared
+     template doesn't have a multi-image component yet. Shows 3 at a time. */
+  .cs-carousel{position:relative;}
+  .cs-carousel-track{display:flex;gap:var(--sp-5);overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;-webkit-overflow-scrolling:touch;padding-bottom:var(--sp-2);scrollbar-width:none;}
+  .cs-carousel-track::-webkit-scrollbar{display:none;}
+  .cs-carousel-slide{flex:0 0 calc((100% - 2 * var(--sp-5)) / 3);scroll-snap-align:start;text-align:center;}
+  .cs-carousel-slide img{width:auto;max-width:100%;height:auto;max-height:520px;margin:0 auto;display:block;border-radius:var(--r-lg);border:1px solid var(--border-hairline);}
+  .cs-carousel-slide figcaption{margin-top:var(--sp-3);font-size:var(--fs-small);color:var(--text-secondary);}
+  .cs-carousel-controls{display:flex;align-items:center;justify-content:center;gap:var(--sp-5);margin-top:var(--sp-6);}
+  .cs-carousel-arrow{width:44px;height:44px;border-radius:var(--r-pill);border:1px solid var(--border-hairline);background:var(--surface);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text-primary);transition:background .2s ease;}
+  .cs-carousel-arrow:hover{background:var(--grey-100);}
+  .cs-carousel-arrow svg{width:16px;height:16px;}
+  .cs-carousel-dots{display:flex;align-items:center;gap:var(--sp-2);}
+  .cs-carousel-dot{width:8px;height:8px;border-radius:50%;background:var(--grey-300);border:none;padding:0;cursor:pointer;transition:background .2s ease, transform .2s ease;}
+  .cs-carousel-dot.is-active{background:var(--black);transform:scale(1.3);}
+  @media (max-width:900px){.cs-carousel-slide{flex:0 0 calc((100% - 1 * var(--sp-5)) / 2);}}
+  @media (max-width:600px){.cs-carousel-slide{flex:0 0 85%;} .cs-carousel-slide img{max-height:420px;}}
+
+  /* Use-case cards — full detail, horizontal swipe/drag strip, no controls. */
+  .usecase-scroll{display:flex;gap:var(--sp-4);overflow-x:auto;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;padding-bottom:var(--sp-3);scrollbar-width:none;}
+  .usecase-scroll::-webkit-scrollbar{display:none;}
+  .usecase-card{flex:0 0 300px;scroll-snap-align:start;padding:var(--sp-5);border:1px solid var(--border-hairline);border-radius:var(--r-md);}
+  .usecase-card .eyebrow{margin-bottom:var(--sp-2);}
+  .usecase-card h4{margin:0 0 var(--sp-2);}
+  .usecase-card p:not(.eyebrow){margin:0;color:var(--text-secondary);font-size:var(--fs-small);}
+  @media (max-width:600px){.usecase-card{flex:0 0 78%;}}
+
+  /* Strategy — four pillars (icon grid) + eight guiding principles (chip grid). */
+  .pillar-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--sp-3);}
+  .pillar-card{background:var(--surface-alt);border-radius:var(--r-lg);padding:var(--sp-5) var(--sp-3);text-align:center;}
+  .pillar-icon{width:40px;height:40px;border-radius:50%;background:var(--black);color:var(--white);display:flex;align-items:center;justify-content:center;margin:0 auto var(--sp-3);}
+  .pillar-icon svg{width:19px;height:19px;}
+  .pillar-label{font-size:var(--fs-small);font-weight:600;color:var(--text-primary);}
+  .principle-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--sp-3);}
+  .principle-chip{background:var(--surface-alt);border-radius:var(--r-md);padding:var(--sp-3) var(--sp-4);font-size:var(--fs-small);color:var(--text-primary);text-align:center;}
+  @media (max-width:800px){.pillar-grid{grid-template-columns:repeat(2,1fr);} .principle-grid{grid-template-columns:repeat(2,1fr);}}
+
+  /* Before/After — icon bullets instead of the shared dash marker. */
+  .ba-card ul.ba-icon-list li{padding-left:0;display:flex;align-items:flex-start;gap:var(--sp-3);}
+  .ba-card ul.ba-icon-list li::before{content:none;}
+  .ba-icon{flex-shrink:0;margin-top:2px;color:var(--text-primary);}
+  .ba-card.ba-after .ba-icon{color:var(--white);}
+  .ba-icon svg{width:16px;height:16px;display:block;}
+
+  /* Personas — initial circle inline with the name instead of stacked above it. */
+  .persona-head{display:flex;align-items:center;gap:var(--sp-3);margin-bottom:var(--sp-3);}
+  .persona-head .persona-initial{margin-bottom:0;flex-shrink:0;}
+  .persona-head h4{margin:0;}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-nav">
+  <a href="index.html" class="nav-back" aria-label="Back to home">
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    Back
+  </a>
+  <span class="nav-case-name">Reimagining Employee Center</span>
+</header>
+
+<main id="main">
+
+  <!-- COVER -->
+  <section class="cs-hero">
+    <p class="eyebrow">Case Study — Product Design</p>
+    <h1 style="view-transition-name: cs-reimagining-employee-center-title;">Reimagining Employee Center</h1>
+    <p class="cs-dek">Transforming an app-centric employee center into an information-centric, mobile-first experience — streamlining access to essential tasks and improving user satisfaction.</p>
+    <div class="cs-meta">
+      <div class="cs-meta-item"><p class="eyebrow">Sector</p><p>Enterprise IT Services · Employee Experience</p></div>
+      <div class="cs-meta-item"><p class="eyebrow">My Role</p><p>UX Designer — strategy, research, wireframes, and visual design</p></div>
+      <div class="cs-meta-item"><p class="eyebrow">Context</p><p>A global enterprise technology company. Details anonymized.</p></div>
+    </div>
+  </section>
+
+  <div class="cs-cover" style="view-transition-name: cs-reimagining-employee-center-media;">
+    <img src="assets/images/case-studies/reimagining-employee-center/cover.png" alt="Reimagined employee center — home, insights, profile, and team analytics screens" style="width:100%; border-radius: var(--r-xl); display:block;">
+  </div>
+
+  <!-- 01 — Overview -->
+  <section class="cs-section">
+    <div class="cs-section-inner">
+      <div class="cs-section-label"><p class="eyebrow">01 — Overview</p></div>
+      <div>
+        <h2 class="cs-headline">500+ scattered apps, reimagined as one information-centric home</h2>
+        <div class="cs-stat-row cs-reveal">
+          <div class="cs-stat"><div class="stat-num" data-count-to="500" data-suffix="+">0+</div><div class="stat-label">Individual apps the old employee center relied on</div></div>
+          <div class="cs-stat"><div class="stat-num" data-count-to="3" data-suffix="">0</div><div class="stat-label">Core personas designed for</div></div>
+          <div class="cs-stat"><div class="stat-num" data-count-to="45" data-suffix="">0</div><div class="stat-label">Focus group responses gathered</div></div>
+        </div>
+
+        <div class="cs-recs-grid cs-reveal" style="margin-top: var(--sp-10);">
+          <div class="recs-col">
+            <h4>My role</h4>
+            <ul>
+              <li>Led strategy definition and the four-pillar personalization model</li>
+              <li>Ran user interviews and a five-group focus-group program</li>
+              <li>Owned wireframes, interaction design, and visual design end-to-end</li>
+              <li>Validated the design with stakeholders, dev, platform, and branding teams</li>
+            </ul>
+          </div>
+          <div class="recs-col">
+            <h4>What this case study covers</h4>
+            <ul>
+              <li>The problem with a 500-app, app-centric employee experience</li>
+              <li>Research: interviews, personas, and a structured focus-group program</li>
+              <li>The information-centric strategy, use cases, and shipped design</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="cs-body cs-reveal" style="margin-top: var(--sp-8);">
+          <p>The existing employee center faced challenges with over 500 individual applications, each requiring separate access for a specific task. The fix: streamline access to essential tasks, modernize the UI, and weave GenAI into the core experience — turning a fragmented app directory into a single, information-centric home.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 — The Problem -->
+  <section class="cs-section">
+    <div class="cs-section-inner">
+      <div class="cs-section-label"><p class="eyebrow">02 — The Problem</p></div>
+      <div>
+        <h2 class="cs-headline">Every task lived behind a different door</h2>
+        <div class="cs-numbered-list cs-reveal">
+          <div class="numbered-item">
+            <span class="num">01</span>
+            <div><h4>500+ apps, one job</h4><p>Payslips, timesheets, holidays, learning, seat booking — each its own app, each requiring separate access and its own mental model.</p></div>
+          </div>
+          <div class="numbered-item">
+            <span class="num">02</span>
+            <div><h4>No unified information layer</h4><p>Nothing surfaced what actually mattered to a given person, in a given role, at a given moment — employees had to go looking for it.</p></div>
+          </div>
+          <div class="numbered-item">
+            <span class="num">03</span>
+            <div><h4>High effort, low adoption</h4><p>The overall interface lacked intuitiveness, so simple tasks like requesting a laptop or checking a policy took more effort than they should.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 — Approach -->
+  <section class="cs-section">
+    <div class="cs-section-inner">
+      <div class="cs-section-label"><p class="eyebrow">03 — Approach</p></div>
+      <div>
+        <h2 class="cs-headline">Four phases, from current-state audit to shipped design</h2>
+        <div class="cs-numbered-list cs-reveal">
+          <div class="numbered-item">
+            <span class="num">01</span>
+            <div><h4>Understand</h4><p>Current-state audit, user interviews, and a platform-capability review to see what was actually possible to build.</p></div>
+          </div>
+          <div class="numbered-item">
+            <span class="num">02</span>
+            <div><h4>Define</h4><p>A five-group focus-group program, a set of guiding principles, and scenario writing to ground the strategy in real behavior.</p></div>
+          </div>
+          <div class="numbered-item">
+            <span class="num">03</span>
+            <div><h4>Design</h4><p>Wireframes, design testing, and branding guidelines, refined across rounds of stakeholder review.</p></div>
+          </div>
+          <div class="numbered-item">
+            <span class="num">04</span>
+            <div><h4>Ship</h4><p>A feasibility check with the platform team, then implementation planning for an MVP rollout.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 — Before / After -->
+  <section class="cs-section">
+    <div class="cs-section-inner">
+      <div class="cs-section-label"><p class="eyebrow">04 — The Fix</p></div>
+      <div>
+        <h2 class="cs-headline">From app-centric to information-centric</h2>
+        <div class="cs-before-after cs-reveal">
+          <div class="ba-card">
+            <p class="eyebrow">Before — App-Centric</p>
+            <ul class="ba-icon-list">
+              <li><span class="ba-icon"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.8"/><rect x="14" y="3" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.8"/><rect x="3" y="14" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.8"/><rect x="14" y="14" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.8"/></svg></span><span>500+ individual apps: My Career, TruTime, Team Chat, MyPay, GoPerform, and more</span></li>
+              <li><span class="ba-icon"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 12h4M16 12h4M12 4v4M12 16v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="12" r="2.4" stroke="currentColor" stroke-width="1.8"/></svg></span><span>Users relied on each app separately to get through a single task</span></li>
+              <li><span class="ba-icon"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 6h16M4 12h10M4 18h13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span><span>The overall interface lacked intuitiveness</span></li>
+            </ul>
+          </div>
+          <div class="ba-card ba-after">
+            <p class="eyebrow">After — Information-Centric</p>
+            <ul class="ba-icon-list">
+              <li><span class="ba-icon"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.8"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span><span>One "Control &amp; Command Centre" — a single, unified home</span></li>
+              <li><span class="ba-icon"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 3l1.8 5.4L19 10l-5.2 1.6L12 17l-1.8-5.4L5 10l5.2-1.6L12 3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span><span>Information is brought to the user proactively, based on persona, using GenAI</span></li>
+              <li><span class="ba-icon"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="7" y="2.5" width="10" height="19" rx="2.5" stroke="currentColor" stroke-width="1.8"/><path d="M11 18.5h2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span><span>Accessibility made easy, with a modern, mobile-first UI</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 — Research -->
+  <section class="cs-section">
+    <div class="cs-section-inner">
+      <div class="cs-section-label"><p class="eyebrow">05 — Research</p></div>
+      <div>
+        <h2 class="cs-headline">Interviews and focus groups, run in parallel</h2>
+        <div class="cs-recs-grid cs-reveal">
+          <div class="recs-col">
+            <h4>User interview goals</h4>
+            <ul>
+              <li>Understand each person's touch point with the current apps</li>
+              <li>See different aspects on a daily, weekly, monthly, and quarterly basis</li>
+              <li>Learn what's important to them, and how they do things today</li>
+            </ul>
+          </div>
+          <div class="recs-col">
+            <h4>Focus group goals</h4>
+            <ul>
+              <li>Understand the pain points behind the current experience</li>
+              <li>Hear their honest opinion of what exists today</li>
+              <li>Know the actual frequency of interaction with each tool</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 — Personas -->
+  <section class="cs-section">
+    <div class="cs-section-inner">
+      <div class="cs-section-label"><p class="eyebrow">06 — Personas</p></div>
+      <div>
+        <h2 class="cs-headline">Three personas, from first day to team lead</h2>
+        <div class="cs-persona-grid cs-reveal">
+          <div class="persona-card">
+            <div class="persona-head"><div class="persona-initial">S</div><h4>Shy Shariq</h4></div>
+            <p class="persona-tag">New Joiner</p>
+            <p>Introverted, curious, feeds on knowledge — but shy to ask for help. Needs a handbook, not a hunt.</p>
+          </div>
+          <div class="persona-card">
+            <div class="persona-head"><div class="persona-initial">B</div><h4>Busy Bulbul</h4></div>
+            <p class="persona-tag">Associate</p>
+            <p>Busy and confident, handling multiple projects at once — doesn't have time for compliance, and keeps losing information.</p>
+          </div>
+          <div class="persona-card">
+            <div class="persona-head"><div class="persona-initial">N</div><h4>Nurturing Naresh</h4></div>
+            <p class="persona-tag">Manager</p>
+            <p>A friendly manager uplifting his reportees' careers, but struggling to track team compliance across client locations.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 — Strategy -->
+  <section class="cs-section">
+    <div class="cs-section-inner">
+      <div class="cs-section-label"><p class="eyebrow">07 — Strategy</p></div>
+      <div>
+        <h2 class="cs-headline">Four pillars, eight principles</h2>
+        <div class="cs-body cs-reveal">
+          <p>Centred around associate profile, location, role, and time of day — every team member receives personalized information tailored to their needs.</p>
+        </div>
+        <div class="cs-reveal" style="margin-top: var(--sp-10);">
+          <p class="eyebrow" style="margin-bottom: var(--sp-4);">Four Pillars</p>
+          <div class="pillar-grid">
+            <div class="pillar-card">
+              <div class="pillar-icon"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="3.2" stroke="currentColor" stroke-width="1.8"/><path d="M5 19c0-3.5 3-6 7-6s7 2.5 7 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+              <div class="pillar-label">Associate Info</div>
+            </div>
+            <div class="pillar-card">
+              <div class="pillar-icon"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 21s7-7.2 7-12a7 7 0 10-14 0c0 4.8 7 12 7 12z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="9" r="2.4" stroke="currentColor" stroke-width="1.8"/></svg></div>
+              <div class="pillar-label">Location</div>
+            </div>
+            <div class="pillar-card">
+              <div class="pillar-icon"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3.5" y="7.5" width="17" height="12" rx="2.5" stroke="currentColor" stroke-width="1.8"/><path d="M8.5 7.5V6a2 2 0 012-2h3a2 2 0 012 2v1.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M3.5 12.5h17" stroke="currentColor" stroke-width="1.8"/></svg></div>
+              <div class="pillar-label">Role</div>
+            </div>
+            <div class="pillar-card">
+              <div class="pillar-icon"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.8"/><path d="M12 7.5V12l3.2 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <div class="pillar-label">Time of Day</div>
+            </div>
+          </div>
+          <p class="eyebrow" style="margin: var(--sp-8) 0 var(--sp-4);">Eight Guiding Principles</p>
+          <div class="principle-grid">
+            <div class="principle-chip">Content Awareness</div>
+            <div class="principle-chip">Task Alerts</div>
+            <div class="principle-chip">Encouragements</div>
+            <div class="principle-chip">Omni Channel</div>
+            <div class="principle-chip">Proactive Engagement</div>
+            <div class="principle-chip">Single Hub</div>
+            <div class="principle-chip">Compliance Assurance</div>
+            <div class="principle-chip">Information Centric</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 — Use Cases -->
+  <section class="cs-section">
+    <div class="cs-section-inner">
+      <div class="cs-section-label"><p class="eyebrow">08 — Use Cases</p></div>
+      <div style="min-width: 0;">
+        <h2 class="cs-headline">Scenarios mapped across every level of the org</h2>
+        <div class="usecase-scroll cs-reveal">
+          <div class="usecase-card"><p class="eyebrow">New Joinee + Associate</p><h4>Natural language help-desk</h4><p>Say "Hey Assistant!" or reach out by mail or phone to raise a request — by voice or text — for policy help-desk, requests, and software assistance.</p></div>
+          <div class="usecase-card"><p class="eyebrow">Associate Level</p><h4>Onboarding into team</h4><p>New joiners get the pointers they need on day one: useful documents, tools required, and an access-initiation mail to the right contact.</p></div>
+          <div class="usecase-card"><p class="eyebrow">General</p><h4>Omnichannel experience</h4><p>Seamlessly switch between mobile and desktop, with notifications that keep you informed on the go.</p></div>
+          <div class="usecase-card"><p class="eyebrow">General</p><h4>Smart assistance</h4><p>When a license or project allocation nears expiry, smart assistance prompts renewal — or notifies the relevant manager and HR contact automatically.</p></div>
+          <div class="usecase-card"><p class="eyebrow">Associate Level</p><h4>Personalised quick actions</h4><p>A quick-action dashboard built from usage patterns, surfacing the things people check most — payslips, time tracking, performance stats, and compliance status — before they have to go looking.</p></div>
+          <div class="usecase-card"><p class="eyebrow">New Joinee</p><h4>Here's your task of the week</h4><p>A weekly digest of what's due: project allocation, assigned assets, and a quick-guide redirect to the applications that matter most that week.</p></div>
+          <div class="usecase-card"><p class="eyebrow">Manager Level</p><h4>Rule creation — automating</h4><p>Managers can turn a repeated approval pattern into a standing rule — for example, auto-approving a recurring software request instead of reviewing it every time.</p></div>
+          <div class="usecase-card"><p class="eyebrow">Manager Level</p><h4>Data analytics for team</h4><p>A rollup of team progress on active initiatives, with prompts to act on it — like drafting a congratulatory note when someone earns recognition.</p></div>
+          <div class="usecase-card"><p class="eyebrow">Associate Level</p><h4>Last day for trutime</h4><p>A proactive reminder ahead of each time-tracking lock-in, so nobody finds out at the deadline that they've missed it.</p></div>
+          <div class="usecase-card"><p class="eyebrow">Leadership Level</p><h4>Travelling smart</h4><p>Location-aware assistance for travel — an auto-adjusted calendar and local logistics, like cab booking, the moment someone lands somewhere new.</p></div>
+          <div class="usecase-card"><p class="eyebrow">Associate Level</p><h4>GoPerform x learning goal</h4><p>Learning-goal progress tracked alongside performance reviews, with recommendations to catch up and an offer to block focus time on the calendar.</p></div>
+          <div class="usecase-card"><p class="eyebrow">Manager Level</p><h4>Onboarding a team member</h4><p>When someone joins a project, managers get a ready-made document checklist to share, plus an optional rule that routes every new joiner through the same service catalogue.</p></div>
+        </div>
+        <p class="cs-closing-note cs-reveal">A curated set — more scenarios were mapped in the original concept beyond what's shown here.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 09 — Wireframes -->
+  <section class="cs-section">
+    <div class="cs-section-inner">
+      <div class="cs-section-label"><p class="eyebrow">09 — Wireframes</p></div>
+      <div>
+        <h2 class="cs-headline">Low-fidelity first, to pressure-test the structure</h2>
+        <div class="cs-body cs-reveal" style="margin-bottom: var(--sp-8);">
+          <p>Home, assistant chat, profile, search, tasks, and team analytics — wireframed early to validate layout and information hierarchy before any visual design.</p>
+        </div>
+        <div class="cs-carousel cs-reveal" aria-label="Wireframes carousel">
+          <div class="cs-carousel-track">
+            <figure class="cs-carousel-slide"><img src="assets/images/case-studies/reimagining-employee-center/wire-home.png" alt="Home screen wireframe"><figcaption>Home</figcaption></figure>
+            <figure class="cs-carousel-slide"><img src="assets/images/case-studies/reimagining-employee-center/wire-ai-chat.png" alt="Assistant chat wireframe"><figcaption>Assistant Chat</figcaption></figure>
+            <figure class="cs-carousel-slide"><img src="assets/images/case-studies/reimagining-employee-center/wire-profile.png" alt="Profile screen wireframe"><figcaption>Profile</figcaption></figure>
+            <figure class="cs-carousel-slide"><img src="assets/images/case-studies/reimagining-employee-center/wire-search.png" alt="Search screen wireframe"><figcaption>Search</figcaption></figure>
+            <figure class="cs-carousel-slide"><img src="assets/images/case-studies/reimagining-employee-center/wire-task.png" alt="Tasks screen wireframe"><figcaption>Tasks</figcaption></figure>
+            <figure class="cs-carousel-slide"><img src="assets/images/case-studies/reimagining-employee-center/wire-team-analytics.png" alt="Team analytics wireframe"><figcaption>Team Analytics</figcaption></figure>
+          </div>
+          <div class="cs-carousel-controls">
+            <button class="cs-carousel-arrow cs-carousel-prev" aria-label="Previous wireframe"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <div class="cs-carousel-dots"></div>
+            <button class="cs-carousel-arrow cs-carousel-next" aria-label="Next wireframe"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 — Focus Group Findings -->
+  <section class="cs-section">
+    <div class="cs-section-inner">
+      <div class="cs-section-label"><p class="eyebrow">10 — Focus Group Findings</p></div>
+      <div>
+        <h2 class="cs-headline">45 responses — 30 from India, 15 from other locations</h2>
+        <div class="cs-body cs-reveal">
+          <p>Five focus groups, each followed by a quick System Usability Survey, to hear directly from the people who'd actually use this every day.</p>
+        </div>
+        <div class="cs-recs-grid cs-reveal" style="margin-top: var(--sp-8);">
+          <div class="recs-col">
+            <h4>What needed work</h4>
+            <ul>
+              <li>Onboarding support — new joiners wanted video guidance, not a document dump</li>
+              <li>Task accessibility — critical tasks needed to be reachable with minimal scrolling</li>
+              <li>Policy access — a proper policy depository, not a buried link</li>
+              <li>Document sharing — simpler sharing for things like pay slips</li>
+            </ul>
+          </div>
+          <div class="recs-col">
+            <h4>What worked</h4>
+            <ul>
+              <li>"The new design is a significant update, indicating real progress"</li>
+              <li>The AI assistant was called out as a notable addition</li>
+              <li>Minimal horizontal scrolling and a clear navigation flow</li>
+              <li>An interface described as clear, with comprehensive integrations</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11 — UI Style & Visual Design -->
+  <section class="cs-section">
+    <div class="cs-section-inner">
+      <div class="cs-section-label"><p class="eyebrow">11 — UI Style &amp; Visual Design</p></div>
+      <div>
+        <h2 class="cs-headline">Flat design, and an unconventional "fluid card"</h2>
+        <div class="cs-recs-grid cs-reveal">
+          <div class="recs-col">
+            <h4>Flat design</h4>
+            <ul>
+              <li>Clean 2D elements, flat colors, no shading or false depth</li>
+              <li>Clarity with a clean, organised layout</li>
+              <li>Improved readability, accessibility, and load speed</li>
+            </ul>
+          </div>
+          <div class="recs-col">
+            <h4>Fluid card</h4>
+            <ul>
+              <li>An unconventional card built to surface what's urgent, fast</li>
+              <li>Icons and UI elements that help the eye scan status at a glance</li>
+              <li>Flexible enough to adapt across personas and contexts</li>
+            </ul>
+          </div>
+        </div>
+        <div class="cs-carousel cs-reveal" style="margin-top: var(--sp-10);" aria-label="Visual design carousel">
+          <div class="cs-carousel-track">
+            <figure class="cs-carousel-slide"><img src="assets/images/case-studies/reimagining-employee-center/home.png" alt="Home screen, visual design"><figcaption>Home</figcaption></figure>
+            <figure class="cs-carousel-slide"><img src="assets/images/case-studies/reimagining-employee-center/ai-chat.png" alt="Assistant chat, visual design"><figcaption>Assistant Chat</figcaption></figure>
+            <figure class="cs-carousel-slide"><img src="assets/images/case-studies/reimagining-employee-center/profile.png" alt="Profile screen, visual design"><figcaption>Profile</figcaption></figure>
+            <figure class="cs-carousel-slide"><img src="assets/images/case-studies/reimagining-employee-center/search.png" alt="Search screen, visual design"><figcaption>Search</figcaption></figure>
+            <figure class="cs-carousel-slide"><img src="assets/images/case-studies/reimagining-employee-center/task.png" alt="Tasks screen, visual design"><figcaption>Tasks</figcaption></figure>
+            <figure class="cs-carousel-slide"><img src="assets/images/case-studies/reimagining-employee-center/team-analytics.png" alt="Team analytics, visual design"><figcaption>Team Analytics</figcaption></figure>
+          </div>
+          <div class="cs-carousel-controls">
+            <button class="cs-carousel-arrow cs-carousel-prev" aria-label="Previous screen"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <div class="cs-carousel-dots"></div>
+            <button class="cs-carousel-arrow cs-carousel-next" aria-label="Next screen"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12 — Mockups -->
+  <section class="cs-section">
+    <div class="cs-section-inner">
+      <div class="cs-section-label"><p class="eyebrow">12 — Mockups</p></div>
+      <div>
+        <h2 class="cs-headline">The reimagined home, desktop and mobile</h2>
+      </div>
+    </div>
+    <div class="cs-cover cs-mockup-pair cs-reveal">
+      <img src="assets/images/case-studies/reimagining-employee-center/laptop.png" alt="Final desktop mockup of the reimagined employee center home screen" style="display:block;">
+      <img src="assets/images/case-studies/reimagining-employee-center/mobile.png" alt="Final mobile mockup of the reimagined employee center home screen" style="display:block;">
+    </div>
+  </section>
+
+  <!-- 13 — Impact -->
+  <section class="cs-section">
+    <div class="cs-section-inner">
+      <div class="cs-section-label"><p class="eyebrow">13 — Impact</p></div>
+      <div>
+        <h2 class="cs-headline">Well-received by users and leadership alike</h2>
+        <div class="cs-vision-band cs-reveal">
+          <span class="vision-flag">Shipped — design validated with users</span>
+          <p class="lead">Employees responded favorably to the revamped employee center, finding it easier to locate information, complete tasks, and collaborate — a foundation the team is now extending into a full template system for every use case.</p>
+          <div class="cs-stat-row">
+            <div class="cs-stat"><div class="stat-num" data-count-to="8" data-suffix="">0</div><div class="stat-label" style="color: var(--grey-500);">Guiding principles defined</div></div>
+            <div class="cs-stat"><div class="stat-num" data-count-to="12" data-suffix="">0</div><div class="stat-label" style="color: var(--grey-500);">Use case scenarios featured in this case study</div></div>
+            <div class="cs-stat"><div class="stat-num" data-count-to="12" data-suffix="">0</div><div class="stat-label" style="color: var(--grey-500);">Steps, current-state audit to implementation</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 14 — Reflection -->
+  <section class="cs-section">
+    <div class="cs-section-inner">
+      <div class="cs-section-label"><p class="eyebrow">14 — Reflection</p></div>
+      <div>
+        <h2 class="cs-headline">What this project reinforced for me</h2>
+        <div class="cs-reflect-grid cs-reveal">
+          <div class="reflect-card">
+            <p class="num">01</p>
+            <h4>Alignment is the real bottleneck</h4>
+            <p>Collaborating across stakeholders, dev, platform, and branding teams was a genuine challenge — the design work was rarely the slow part.</p>
+          </div>
+          <div class="reflect-card">
+            <p class="num">02</p>
+            <h4>Consolidation is a UX problem</h4>
+            <p>500 apps weren't a technology failure so much as an information-architecture one — the fix was rethinking what surfaces, not adding another tool.</p>
+          </div>
+          <div class="reflect-card">
+            <p class="num">03</p>
+            <h4>Templates outlast one launch</h4>
+            <p>Turning the pattern into a reusable template system for every use case is what makes an MVP rollout realistic, not just a single polished screen.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLOSING -->
+  <section class="cs-closing">
+    <p class="eyebrow" style="margin-bottom: var(--sp-5);">Thank you</p>
+    <h2>Happy to go deeper on the research, the strategy, or any of the screens.</h2>
+    <p>Reach out and I'll walk you through it.</p>
+    <span class="magnetic-wrap">
+      <a class="btn btn-primary" data-magnetic href="index.html#contact">Get in touch</a>
+    </span>
+  </section>
+
+  <!-- Next case study teaser -->
+  <div class="cs-next">
+    <a class="cs-next-card" href="next-gen-contact-center.html" style="text-decoration:none;">
+      <p class="eyebrow">Next</p>
+      <h3>Next Gen Contact Center Web App</h3>
+      <p>Unifying two legacy platforms into one AI-orchestrated desktop for 35,000+ support representatives.</p>
+    </a>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <span>&copy; <span id="year"></span> Pavithran P.</span>
+  <div class="footer-links">
+    <a href="https://www.linkedin.com/in/pavithrandesigns/" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="mailto:ppavithran@outlook.com">Email</a>
+    <a class="back-to-top" href="#main">Back to top ↑</a>
+  </div>
+</footer>
+
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/case-study.js"></script>
+<script>
+(function () {
+  function initCarousels() {
+    document.querySelectorAll('.cs-carousel').forEach(function (carousel) {
+      var track = carousel.querySelector('.cs-carousel-track');
+      var dotsWrap = carousel.querySelector('.cs-carousel-dots');
+      var prevBtn = carousel.querySelector('.cs-carousel-prev');
+      var nextBtn = carousel.querySelector('.cs-carousel-next');
+      if (!track) return;
+      var slides = Array.prototype.slice.call(track.children);
+      if (!slides.length) return;
+
+      var dots = [];
+
+      function perPage() {
+        var slideWidth = slides[0].getBoundingClientRect().width;
+        if (!slideWidth) return 1;
+        var gap = parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap || '0') || 0;
+        return Math.max(1, Math.round((track.clientWidth + gap) / (slideWidth + gap)));
+      }
+
+      function currentIndex() {
+        var trackRect = track.getBoundingClientRect();
+        var closest = 0, closestDist = Infinity;
+        slides.forEach(function (slide, i) {
+          var r = slide.getBoundingClientRect();
+          var dist = Math.abs(r.left - trackRect.left);
+          if (dist < closestDist) { closestDist = dist; closest = i; }
+        });
+        return closest;
+      }
+
+      function buildDots() {
+        if (!dotsWrap) return;
+        dotsWrap.innerHTML = '';
+        dots = [];
+        var step = perPage();
+        var pageCount = Math.max(1, Math.ceil(slides.length / step));
+        for (var p = 0; p < pageCount; p++) {
+          (function (p) {
+            var dot = document.createElement('button');
+            dot.className = 'cs-carousel-dot';
+            dot.type = 'button';
+            dot.setAttribute('aria-label', 'Go to page ' + (p + 1));
+            if (p === 0) dot.classList.add('is-active');
+            dot.addEventListener('click', function () {
+              var idx = Math.min(slides.length - 1, p * step);
+              slides[idx].scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
+            });
+            dotsWrap.appendChild(dot);
+            dots.push(dot);
+          })(p);
+        }
+      }
+
+      function updateActive() {
+        var idx = currentIndex();
+        var page = Math.round(idx / perPage());
+        dots.forEach(function (d, i) { d.classList.toggle('is-active', i === page); });
+      }
+
+      var scrollTimeout;
+      track.addEventListener('scroll', function () {
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(updateActive, 100);
+      });
+
+      if (prevBtn) prevBtn.addEventListener('click', function () {
+        var idx = Math.max(0, currentIndex() - perPage());
+        slides[idx].scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
+      });
+      if (nextBtn) nextBtn.addEventListener('click', function () {
+        var idx = Math.min(slides.length - 1, currentIndex() + perPage());
+        slides[idx].scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
+      });
+
+      var resizeTimeout;
+      window.addEventListener('resize', function () {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(function () { buildDots(); updateActive(); }, 150);
+      });
+
+      buildDots();
+      updateActive();
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCarousels);
+  } else {
+    initCarousels();
+  }
+})();
+</script>
+</body>
+</html>

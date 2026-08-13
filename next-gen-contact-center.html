@@ -6,7 +6,7 @@
 <title>Next Gen Contact Center Web App — Pavithran P</title>
 <meta name="description" content="Unifying two legacy platforms into one AI-orchestrated desktop for 35,000+ support representatives. A case study in research-led enterprise UX.">
 <meta name="view-transition" content="same-origin">
-<link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+<link rel="icon" type="image/png" href="assets/images/favicon.png">
 <link rel="stylesheet" href="assets/css/styles.css">
 <style>
   /* Local to this case study only — not part of the shared stylesheet.
@@ -24,6 +24,25 @@
   .persona-head{display:flex;align-items:center;gap:var(--sp-3);margin-bottom:var(--sp-3);}
   .persona-head .persona-initial{margin-bottom:0;flex-shrink:0;}
   .persona-head h4{margin:0;}
+
+  /* Trailer — skimmable Problem/Solution/Outcome/Output snapshot. */
+  .cs-trailer{max-width:var(--container);margin:0 auto;padding:0 var(--gutter) var(--sp-10);}
+  .trailer-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--sp-6) var(--sp-5);padding-top:var(--sp-8);border-top:1px solid var(--border-hairline);}
+  .trailer-icon{display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:var(--r-sm);background:var(--grey-50);color:var(--text-primary);margin-bottom:var(--sp-4);}
+  .trailer-icon svg{width:20px;height:20px;}
+  .trailer-block .eyebrow{margin-bottom:var(--sp-3);}
+  .trailer-block ul{display:flex;flex-direction:column;gap:var(--sp-2);}
+  .trailer-block li{font-size:var(--fs-small);color:var(--text-secondary);padding-left:var(--sp-4);position:relative;line-height:var(--lh-snug);}
+  .trailer-block li::before{content:'';position:absolute;left:0;top:0.5em;width:5px;height:5px;border-radius:50%;background:var(--grey-300);}
+  .trailer-scroll{display:inline-flex;align-items:center;gap:var(--sp-2);margin-top:var(--sp-8);font-size:var(--fs-small);font-weight:500;color:var(--text-tertiary);transition:color var(--dur-fast) var(--ease-out),gap var(--dur-fast) var(--ease-out);}
+  .trailer-scroll:hover{color:var(--text-primary);gap:var(--sp-3);}
+  .trailer-scroll svg{width:14px;height:14px;}
+  @media (max-width:900px){.trailer-grid{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:560px){.trailer-grid{grid-template-columns:1fr;}}
+
+  /* Scrollspy active nav-link state (see case-study.js initScrollspy). */
+  .nav-link.is-active{color:var(--text-primary);}
+  .nav-link.is-active::after{transform:scaleX(1);transform-origin:left;}
 </style>
 </head>
 <body>
@@ -34,7 +53,13 @@
     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
     Back
   </a>
-  <span class="nav-case-name">Next Gen Contact Center Web App</span>
+  <nav class="nav-links" aria-label="Case study sections">
+    <a class="nav-link" href="#problem">Problem</a>
+    <a class="nav-link" href="#research">Research</a>
+    <a class="nav-link" href="#design">Design</a>
+    <a class="nav-link" href="#impact">Impact</a>
+    <a class="nav-link" href="#reflection">Reflection</a>
+  </nav>
 </header>
 
 <main id="main">
@@ -60,7 +85,52 @@
     </div>
   </section>
 
-  <div class="cs-cover" style="view-transition-name: cs-next-gen-contact-center-media;">
+  <!-- Trailer — skimmable Problem / Solution / Outcome / Output snapshot -->
+  <section class="cs-trailer cs-reveal">
+    <div class="trailer-grid">
+      <div class="trailer-block">
+        <span class="trailer-icon"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 3l10 18H2L12 3z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 10v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="17" r="0.9" fill="currentColor"/></svg></span>
+        <p class="eyebrow">Problem</p>
+        <ul>
+          <li>Two systems, two rep teams</li>
+          <li>Costly call transfers between them</li>
+          <li>Reps stuck in slow, laggy tools</li>
+        </ul>
+      </div>
+      <div class="trailer-block">
+        <span class="trailer-icon"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 3a6 6 0 00-3.5 10.9c.6.45 1 .95 1.1 1.6h4.8c.1-.65.5-1.15 1.1-1.6A6 6 0 0012 3z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 18h4M9.5 21h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+        <p class="eyebrow">Solution</p>
+        <ul>
+          <li>Shipped a redesigned service-change flow</li>
+          <li>Helped shape a bigger AI-orchestrated vision</li>
+        </ul>
+      </div>
+      <div class="trailer-block">
+        <span class="trailer-icon"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 17l6-6 4 4 8-8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 6h6v6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <p class="eyebrow">Outcome</p>
+        <ul>
+          <li>28K reps on the new flow · 30% fewer clicks</li>
+          <li>Unified specs signed off by stakeholders</li>
+        </ul>
+      </div>
+      <div class="trailer-block">
+        <span class="trailer-icon"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 3l9 5-9 5-9-5 9-5z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M3 13l9 5 9-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <p class="eyebrow">Output</p>
+        <ul>
+          <li>Shipped SCM redesign</li>
+          <li>Finalized Unified design specs</li>
+          <li>Research-backed personas &amp; journey maps</li>
+          <li>Field-tested recommendations</li>
+        </ul>
+      </div>
+    </div>
+    <a href="#cover" class="trailer-scroll">
+      <span>Scroll for the full case study</span>
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 4v15m0 0l-5-5m5 5l5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </section>
+
+  <div class="cs-cover" id="cover" style="view-transition-name: cs-next-gen-contact-center-media;">
     <img src="assets/images/case-studies/next-gen-contact-center/cover.png" alt="Next Gen Contact Center Web App — unified agent desktop preview" style="width:100%; border-radius: var(--r-xl); display:block;">
   </div>
 
@@ -100,7 +170,7 @@
   </section>
 
   <!-- 03 — The Problem -->
-  <section class="cs-section">
+  <section class="cs-section" id="problem" data-nav="problem">
     <div class="cs-section-inner">
       <div class="cs-section-label"><p class="eyebrow">02 — The Problem</p></div>
       <div>
@@ -109,22 +179,22 @@
           <div class="numbered-item">
             <span class="num">01</span>
             <div>
-              <h4>Two platforms, one job</h4>
-              <p>One legacy tool for mobile &amp; wireless, a completely separate one for home internet — with different logic, different UI, different data.</p>
+              <h4>Two systems, two rep teams</h4>
+              <p>Separate legacy platforms for wireless and wireline, staffed by separate reps — a wireless rep had to transfer the customer to a wireline rep just to finish the job, at real cost to the company and a broken feel for the customer.</p>
             </div>
           </div>
           <div class="numbered-item">
             <span class="num">02</span>
             <div>
-              <h4>Mentally stitched together</h4>
-              <p>Resolving a single customer issue meant tabbing between systems and reconciling what each one showed.</p>
+              <h4>Slow, disconnected tools</h4>
+              <p>Reps actively searched for information across systems that lagged and stalled, adding time to every call.</p>
             </div>
           </div>
           <div class="numbered-item">
             <span class="num">03</span>
             <div>
               <h4>The cost showed up everywhere</h4>
-              <p>Longer calls, inconsistent answers depending on which rep and which tool, and a steep learning curve for new hires.</p>
+              <p>Long contacts, inconsistent answers depending on which rep and which tool, steep training time, and real cost from maintaining multiple applications in parallel.</p>
             </div>
           </div>
         </div>
@@ -133,7 +203,7 @@
   </section>
 
   <!-- 04 — Proof of Execution -->
-  <section class="cs-section">
+  <section class="cs-section" data-nav="impact">
     <div class="cs-section-inner">
       <div class="cs-section-label"><p class="eyebrow">03 — Proof of Execution</p></div>
       <div>
@@ -173,7 +243,7 @@
   </section>
 
   <!-- 05 — Setting the Bigger Direction -->
-  <section class="cs-section">
+  <section class="cs-section" data-nav="research">
     <div class="cs-section-inner">
       <div class="cs-section-label"><p class="eyebrow">04 — Setting Direction</p></div>
       <div>
@@ -190,7 +260,7 @@
   </section>
 
   <!-- 06 — Research Approach -->
-  <section class="cs-section">
+  <section class="cs-section" id="research" data-nav="research">
     <div class="cs-section-inner">
       <div class="cs-section-label"><p class="eyebrow">05 — Research Approach</p></div>
       <div>
@@ -206,7 +276,7 @@
   </section>
 
   <!-- 07 — Research Synthesis -->
-  <section class="cs-section">
+  <section class="cs-section" data-nav="research">
     <div class="cs-section-inner">
       <div class="cs-section-label"><p class="eyebrow">06 — Research Synthesis</p></div>
       <div>
@@ -222,7 +292,7 @@
   </section>
 
   <!-- 08 — Personas -->
-  <section class="cs-section">
+  <section class="cs-section" data-nav="research">
     <div class="cs-section-inner">
       <div class="cs-section-label"><p class="eyebrow">07 — Personas</p></div>
       <div>
@@ -249,7 +319,7 @@
   </section>
 
   <!-- 09 — Concept Exploration -->
-  <section class="cs-section">
+  <section class="cs-section" id="design" data-nav="design">
     <div class="cs-section-inner">
       <div class="cs-section-label"><p class="eyebrow">08 — Concept Exploration</p></div>
       <div>
@@ -286,7 +356,7 @@
   </section>
 
   <!-- 10 — Grounding the Design -->
-  <section class="cs-section">
+  <section class="cs-section" data-nav="design">
     <div class="cs-section-inner">
       <div class="cs-section-label"><p class="eyebrow">09 — Grounding the Design</p></div>
       <div>
@@ -313,7 +383,7 @@
   </section>
 
   <!-- 11 — Bringing It to Life -->
-  <section class="cs-section">
+  <section class="cs-section" data-nav="design">
     <div class="cs-section-inner">
       <div class="cs-section-label"><p class="eyebrow">10 — Bringing It to Life</p></div>
       <div>
@@ -329,7 +399,7 @@
   </section>
 
   <!-- 12 — Field Validation -->
-  <section class="cs-section">
+  <section class="cs-section" data-nav="impact">
     <div class="cs-section-inner">
       <div class="cs-section-label"><p class="eyebrow">11 — Field Validation</p></div>
       <div>
@@ -362,7 +432,7 @@
   </section>
 
   <!-- 13 — Key Findings -->
-  <section class="cs-section">
+  <section class="cs-section" data-nav="impact">
     <div class="cs-section-inner">
       <div class="cs-section-label"><p class="eyebrow">12 — Key Findings</p></div>
       <div>
@@ -394,7 +464,7 @@
   </section>
 
   <!-- 14 — Recommendations -->
-  <section class="cs-section">
+  <section class="cs-section" id="impact" data-nav="impact">
     <div class="cs-section-inner">
       <div class="cs-section-label"><p class="eyebrow">13 — Recommendations</p></div>
       <div>
@@ -424,7 +494,7 @@
   </section>
 
   <!-- 15 — The Bigger Vision -->
-  <section class="cs-section">
+  <section class="cs-section" data-nav="impact">
     <div class="cs-section-inner">
       <div class="cs-section-label"><p class="eyebrow">14 — The Bigger Vision</p></div>
       <div>
@@ -444,7 +514,7 @@
   </section>
 
   <!-- 16 — Honest Status -->
-  <section class="cs-section">
+  <section class="cs-section" data-nav="impact">
     <div class="cs-section-inner">
       <div class="cs-section-label"><p class="eyebrow">15 — Honest Status</p></div>
       <div>
@@ -452,16 +522,16 @@
         <div class="cs-timeline cs-reveal">
           <div class="timeline-item"><p class="t-when">~2 yrs, BAU</p><p>Owned troubleshooting &amp; service-change work; shipped the Service Change Modernization redesign.</p></div>
           <div class="timeline-item"><p class="t-when">Early prior year</p><p>The broader unification vision kicked off, aiming to merge both legacy platforms into one.</p></div>
-          <div class="timeline-item"><p class="t-when">This year</p><p>A platform engineering team took the vision forward with dedicated funding and a formal build.</p></div>
+          <div class="timeline-item"><p class="t-when">This year</p><p>A platform engineering team took the vision forward with dedicated funding and a formal build. Detailed designs for the Unified platform reached stakeholder sign-off.</p></div>
           <div class="timeline-item"><p class="t-when">Pilot pushed</p><p>The first pilot launch, originally targeted for last summer, was pushed past that date.</p></div>
         </div>
-        <p class="cs-closing-note cs-reveal">My last day was the end of July, before the pilot launched. Everything past the Service Change work reflects research, concepts, and design contributions, not delivered production results.</p>
+        <p class="cs-closing-note cs-reveal">My last day was the end of July, before the pilot launched. Design specs for the Unified platform were finalized and signed off, but the pilot itself hadn't shipped — so beyond the Service Change work, this reflects finished design and research, not delivered production results.</p>
       </div>
     </div>
   </section>
 
   <!-- 17 — Reflection -->
-  <section class="cs-section">
+  <section class="cs-section" id="reflection" data-nav="reflection">
     <div class="cs-section-inner">
       <div class="cs-section-label"><p class="eyebrow">16 — Reflection</p></div>
       <div>

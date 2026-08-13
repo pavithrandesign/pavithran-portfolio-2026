@@ -49,8 +49,38 @@
     blocks.forEach((b) => io.observe(b));
   }
 
+  // Scrollspy — highlights the .nav-link whose target section is currently
+  // in view. Matches links (href="#id") to sections (id="id") automatically,
+  // so any case study can opt in just by adding a .nav-links submenu with
+  // anchors that point at real section ids.
+  function initScrollspy() {
+    const navLinks = document.querySelectorAll('.nav-link[href^="#"]');
+    if (!navLinks.length) return;
+
+    const targets = Array.prototype.slice.call(navLinks).reduce((map, link) => {
+      const id = link.getAttribute('href').slice(1);
+      const section = document.getElementById(id);
+      if (section) map.push({ link, section });
+      return map;
+    }, []);
+    if (!targets.length) return;
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const match = targets.find((t) => t.section === entry.target);
+        if (!match) return;
+        navLinks.forEach((l) => l.classList.remove('is-active'));
+        match.link.classList.add('is-active');
+      });
+    }, { rootMargin: '-40% 0px -50% 0px', threshold: 0 });
+
+    targets.forEach((t) => io.observe(t.section));
+  }
+
   document.addEventListener('DOMContentLoaded', () => {
     initHeadlineReveal();
     initBlockReveal();
+    initScrollspy();
   });
 })();

@@ -655,7 +655,7 @@ body.has-custom-cursor .featured-work { cursor: none; }
   border-top: 1px solid var(--border-hairline);
 }
 .cs-meta-item .eyebrow { margin-bottom: var(--sp-2); }
-.cs-meta-item p { font-size: var(--fs-small); max-width: 26ch; }
+.cs-meta-item p { font-size: var(--fs-small); max-width: 26ch; color: var(--text-secondary); }
 
 .cs-cover {
   max-width: var(--container);

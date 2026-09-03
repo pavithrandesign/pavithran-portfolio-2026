@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<!--
+  DRAFT - UX Assessment Tool case study.
+  Built from: the "Work_2_Assesment Tool.pdf" overview slide, 3 visual-design
+  screens, 3 wireframe screens, the style-guide export, the two evaluation
+  flowcharts (Start Evaluation / Start General Comments), and the "correct
+  sequence" reference images, per the design-system.md reference doc.
+
+  STATUS: structure + copy only. Every <img> below points to its FINAL
+  intended path under assets/images/case-studies/ux-assessment-tool/ - none
+  of those files have been copied into the repo yet (that's the deliberate
+  next step, done separately with your go-ahead). Until then these will
+  render as broken images, which is expected.
+
+  THINGS TO CONFIRM (flagged inline too):
+  - Sector / My Role / Context in the hero meta - left as [placeholders],
+    since we're holding off on real-world framing per your last note.
+  - Exact wording of the PDF's small body-copy (Overview cards, persona
+    Background/Needs/Frustration text) was too small to transcribe reliably
+    at the resolution provided - the copy below is my synthesis of the
+    structure/headings I *could* read clearly, not a verbatim transcript.
+    Swap in your real wording wherever it matters.
+  - Exact numbers on the Usability Testing severity chart / results table
+    were too small to read with confidence - left as a described image
+    reference rather than retyped (possibly wrong) figures.
+  - Cover image assumed to be the full-color "My Activities" home screen -
+    swap the assumed filename if you want a different shot as the cover.
+
+  No changes made to styles.css, main.js, case-study.js, index.html, or
+  either existing case study - this file is self-contained, matching the
+  "don't touch other files" instruction.
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UX Assessment Tool - Pavithran P</title>
+<meta name="description" content="A structured heuristic-evaluation platform that turns ad-hoc UX audits into a guided, domain-aware workflow - from scoring criteria to an auto-generated report.">
+<meta name="view-transition" content="same-origin">
+<link rel="icon" type="image/png" href="assets/images/favicon.png">
+<link rel="stylesheet" href="assets/css/styles.css">
+<style>
+  /* Local to this case study only - not part of the shared stylesheet.
+     Copied verbatim from existing case studies per design-system.md, so
+     it renders identically to the same components elsewhere on the site. */
+
+  /* Personas - initial circle inline with the name instead of stacked above it. */
+  .persona-head{display:flex;align-items:center;gap:var(--sp-3);margin-bottom:var(--sp-3);}
+  .persona-head .persona-initial{margin-bottom:0;flex-shrink:0;}
+  .persona-head h4{margin:0;}
+
+  /* Mockup pair - side-by-side comparison images, bottom-aligned, no crop. */
+  .cs-mockup-pair{display:flex;align-items:flex-start;justify-content:center;gap:var(--sp-5);flex-wrap:nowrap;}
+  .cs-mockup-pair img{width:auto;height:auto;max-width:100%;max-height:clamp(320px, 40vw, 560px);border-radius:var(--r-lg);border:1px solid var(--border-hairline);}
+  .cs-mockup-pair figure{flex:1 1 0;min-width:0;text-align:center;}
+  .cs-mockup-pair figcaption{margin-top:var(--sp-3);font-size:var(--fs-small);color:var(--text-secondary);}
+  @media (max-width:800px){
+    .cs-mockup-pair{flex-direction:column;align-items:center;}
+    .cs-mockup-pair img{max-height:none;width:min(100%, 480px);height:auto;}
+  }
+
+  /* Contextual link + lightbox modal - matches the pattern used in the
+     Next Gen Contact Center presentation deck (.p-view text+arrow button,
+     light-card modal, prev/next nav in the footer). Every image on this
+     page is hidden behind a short, specific link (e.g. "See the primary
+     color palette") instead of being shown inline; clicking it opens the
+     modal, with prev/next through every link sharing the same
+     data-lightbox-group. */
+  .p-view{
+    display:inline-flex;align-items:center;gap:6px;
+    font-family:inherit;font-size:var(--fs-small);font-weight:600;
+    color:var(--text-primary);cursor:pointer;background:none;border:none;padding:0;text-align:left;
+  }
+  .p-view svg{width:13px;height:13px;display:block;flex-shrink:0;}
+  .p-view:hover{color:var(--text-secondary);}
+
+  .lightbox{position:fixed;inset:0;z-index:200;display:none;align-items:center;justify-content:center;padding:var(--sp-6);}
+  .lightbox.is-open{display:flex;}
+  .lightbox-backdrop{position:absolute;inset:0;background:rgba(10,10,10,.6);}
+  .lightbox-panel{
+    position:relative;background:var(--white);border:1px solid var(--border-hairline);border-radius:var(--r-lg);
+    max-width:min(1100px,95vw);max-height:88vh;width:100%;display:flex;flex-direction:column;overflow:hidden;
+    box-shadow:0 30px 70px rgba(10,10,10,.28);
+  }
+  .lightbox-head{display:flex;align-items:center;justify-content:space-between;padding:var(--sp-5) var(--sp-6);border-bottom:1px solid var(--border-hairline);flex-shrink:0;}
+  .lightbox-head h3{font-size:var(--fs-body-lg);font-weight:600;}
+  .lightbox-close{
+    width:32px;height:32px;border-radius:var(--r-pill);border:1px solid var(--grey-200);background:var(--white);
+    display:flex;align-items:center;justify-content:center;color:var(--text-primary);cursor:pointer;flex-shrink:0;
+  }
+  .lightbox-close svg{width:14px;height:14px;}
+  .lightbox-close:hover{border-color:var(--black);}
+  .lightbox-body{padding:var(--sp-6);overflow:auto;background:var(--grey-50);}
+  .lightbox-body img{display:block;width:100%;height:auto;border-radius:var(--r-lg);border:1px solid var(--border-hairline);}
+  .lightbox-foot{flex-shrink:0;padding:var(--sp-5) var(--sp-6);border-top:1px solid var(--border-hairline);background:var(--white);}
+  .lightbox-foot:empty{display:none;}
+
+  .concept-nav{display:flex;align-items:center;justify-content:center;gap:var(--sp-5);}
+  .concept-nav-arrow{
+    width:44px;height:44px;border-radius:var(--r-pill);border:1px solid var(--border-hairline);background:var(--white);
+    display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text-primary);transition:background .2s var(--ease-out);
+  }
+  .concept-nav-arrow:hover{background:var(--grey-100);}
+  .concept-nav-arrow svg{width:16px;height:16px;}
+  .concept-nav-dots{display:flex;align-items:center;gap:var(--sp-2);}
+  .concept-nav-dot{width:8px;height:8px;border-radius:50%;background:var(--grey-300);border:none;padding:0;cursor:pointer;transition:background .2s var(--ease-out),transform .2s var(--ease-out);}
+  .concept-nav-dot.is-active{background:var(--black);transform:scale(1.3);}
+
+  @media (max-width:700px){
+    .lightbox-panel{max-height:92vh;}
+    .lightbox-head{padding:var(--sp-4) var(--sp-5);}
+    .lightbox-body{padding:var(--sp-5);}
+  }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-nav">
+  <a href="index.html" class="nav-back" aria-label="Back to home">
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    Back
+  </a>
+  <span class="nav-case-name">UX Assessment Tool</span>
+</header>
+
+<main id="main">
+
+  <!-- COVER -->
+  <section class="cs-hero">
+    <p class="eyebrow">Case Study - UX Research &amp; Product Design</p>
+    <h1 style="view-transition-name: cs-ux-assessment-tool-title;">UX Assessment Tool</h1>
+    <p class="cs-dek">A tool that turns heuristic evaluation from a blank-page exercise into a guided workflow - domain-aware questions, severity scoring, and an auto-generated report, all in one place.</p>
+  </section>
+
+  <div class="cs-cover" style="view-transition-name: cs-ux-assessment-tool-media;">
+    <img src="assets/images/case-studies/ux-assessment-tool/cover.png" alt="UX Assessment Tool - My Activities dashboard, evaluation workspace, and generated report" style="width:100%; border-radius: var(--r-xl); border:1px solid var(--border-hairline); display:block;">
+  </div>
+
+  <!-- 01 - Overview -->
+  <section class="cs-section">
+    <div class="cs-section-inner">
+      <div class="cs-section-label"><p class="eyebrow">01 - Overview</p></div>
+      <div>
+        <h2 class="cs-headline">A guided workflow, in place of a blank checklist</h2>
+        <div class="cs-stat-row cs-reveal">
+          <div class="cs-stat"><div class="stat-num" data-count-to="18" data-suffix="">0</div><div class="stat-label">Practitioners tested the tool, across 5 locations</div></div>
+          <div class="cs-stat"><div class="stat-num" data-count-to="8" data-suffix="">0</div><div class="stat-label">Heuristic categories scored per evaluation</div></div>
+          <div class="cs-stat"><div class="stat-num" data-count-to="4" data-suffix="">0</div><div class="stat-label">VIMM impact dimensions rated on every finding</div></div>
+        </div>
+
+        <div class="cs-recs-grid cs-reveal" style="margin-top: var(--sp-10);">
+          <div class="recs-col">
+            <h4>What the tool does</h4>
+            <ul>
+              <li>Walks an evaluator through a domain-aware set of heuristic questions, page by page</li>
+              <li>Captures severity and an observation/recommendation directly on the screenshot in question</li>
+              <li>Won't let a category close out until every question in it has an answer</li>
+              <li>Generates a shareable report automatically - score, category breakdown, and VIMM impact</li>
+            </ul>
+          </div>
+          <div class="recs-col">
+            <h4>What this case study covers</h4>
+            <ul>
+              <li>The two evaluator profiles the workflow was designed around</li>
+              <li>How the guided evaluation and reporting logic actually works</li>
+              <li>The wireframe-to-visual-design path, and the style guide built to keep it consistent</li>
+              <li>Usability testing results and an A/B round on the home screen</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="cs-body cs-reveal" style="margin-top: var(--sp-8);">
+          <p>Most heuristic evaluations start from a blank spreadsheet - a senior reviewer's checklist, rebuilt from memory every time, on whatever site or app is in front of them. This tool replaces that with something structured and repeatable: pick a domain, work through a guided set of expert questions per page, mark severity and observations on the screen as you go, and get a client-ready report out the other end - no separate write-up pass required.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 - The Problem -->
+  <section class="cs-section">
+    <div class="cs-section-inner">
+      <div class="cs-section-label"><p class="eyebrow">02 - The Problem</p></div>
+      <div>
+        <h2 class="cs-headline">Every evaluation started from zero</h2>
+        <div class="cs-numbered-list cs-reveal">
+          <div class="numbered-item">
+            <span class="num">01</span>
+            <div>
+              <h4>No domain-specific guidance</h4>
+              <p>Generic heuristic checklists don't know the difference between a banking site and an intranet portal - evaluators fell back on broad best practices instead of the questions that actually mattered for that domain.</p>
+            </div>
+          </div>
+          <div class="numbered-item">
+            <span class="num">02</span>
+            <div>
+              <h4>Findings scattered across tools</h4>
+              <p>Screenshots in one place, notes in a doc, severity ratings in someone's head - there was no single place to mark an observation directly on the screen and carry it straight through to a report.</p>
+            </div>
+          </div>
+          <div class="numbered-item">
+            <span class="num">03</span>
+            <div>
+              <h4>Reporting was the real bottleneck</h4>
+              <p>Turning a completed evaluation into something a stakeholder could actually read meant hours of manually building charts and formatting a deck - after the evaluation work itself was already done.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 - Research -->
+  <section class="cs-section">
+    <div class="cs-section-inner">
+      <div class="cs-section-label"><p class="eyebrow">03 - Research</p></div>
+      <div>
+        <h2 class="cs-headline">Two evaluator profiles, at opposite ends of experience</h2>
+        <div class="cs-body cs-reveal">
+          <p>Remote interviews with practitioners at different experience levels surfaced two clear profiles to design the workflow around.</p>
+        </div>
+        <div class="cs-persona-grid cs-reveal" style="grid-template-columns: repeat(2, 1fr); max-width: 720px;">
+          <div class="persona-card">
+            <div class="persona-head"><div class="persona-initial">A</div><h4>Arjun</h4></div>
+            <p class="persona-tag">Junior Designer · Age 25</p>
+            <p>New to UX evaluation and short on a senior reviewer's instinct for what to look for. Wants a tool that supplies the expert questions he doesn't yet know to ask, instead of handing him a blank checklist.</p>
+          </div>
+          <div class="persona-card">
+            <div class="persona-head"><div class="persona-initial">P</div><h4>Priya</h4></div>
+            <p class="persona-tag">UX Researcher · Age 30</p>
+            <p>Runs heuristic evaluations often enough that the workflow itself has become the slow part. Wants to capture findings once, on the screen, and get a client-ready report out without a separate reporting pass.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 - How It Works -->
+  <section class="cs-section">
+    <div class="cs-section-inner">
+      <div class="cs-section-label"><p class="eyebrow">04 - How It Works</p></div>
+      <div>
+        <h2 class="cs-headline">A path that won't let you skip a step</h2>
+        <div class="cs-numbered-list cs-reveal">
+          <div class="numbered-item">
+            <span class="num">01</span>
+            <div>
+              <h4>Answer, or flag a screen</h4>
+              <p>Each question gets a Yes / No / NA. A "No" is where the real work happens - everything else just moves to the next question.</p>
+            </div>
+          </div>
+          <div class="numbered-item">
+            <span class="num">02</span>
+            <div>
+              <h4>Mark it on the screen</h4>
+              <p>A "No" opens the exact screen area for annotation: select a severity, mapped to a named heuristic principle (e.g. User Control &amp; Freedom), and write the observation and recommendation directly against that screenshot.</p>
+            </div>
+          </div>
+          <div class="numbered-item">
+            <span class="num">03</span>
+            <div>
+              <h4>Nothing skipped</h4>
+              <p>A category won't close out until every question in it is answered, and a flagged issue can't be saved without a severity selected - the tool holds the evaluator to a complete pass before moving on.</p>
+            </div>
+          </div>
+          <div class="numbered-item">
+            <span class="num">04</span>
+            <div>
+              <h4>One click to a report</h4>
+              <p>Once every category is complete, Generate Report compiles the whole evaluation automatically - overall score, per-category breakdown, and VIMM impact - ready to send to a stakeholder.</p>
+            </div>
+          </div>
+        </div>
+        <p class="cs-closing-note cs-reveal">A lighter-weight "General Comments" tab sits alongside the guided evaluation, for feedback that doesn't need a full heuristic pass: add the screens, write free-form comments, and generate the same report.</p>
+        <div class="cs-reveal" style="margin-top: var(--sp-8);">
+          <button class="p-view" type="button" data-title="Evaluation and General Comments User Flow" data-img="assets/images/case-studies/ux-assessment-tool/user-flow.png" data-lightbox-group="user-flow">See the Evaluation and General Comments flow diagram<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 - Wireframes -->
+  <section class="cs-section">
+    <div class="cs-section-inner">
+      <div class="cs-section-label"><p class="eyebrow">05 - Wireframes</p></div>
+      <div>
+        <h2 class="cs-headline">Low-fidelity first, to pressure-test the workflow</h2>
+        <div class="cs-body cs-reveal" style="margin-bottom: var(--sp-8);">
+          <p>The activity dashboard, the guided evaluation screen, and the generated report - wireframed early to validate the structure before any visual design.</p>
+        </div>
+        <div class="cs-reveal">
+          <button class="p-view" type="button" data-title="Wireframes" data-lightbox-group="wireframes" data-images='[{"title":"My Evaluations - Home (Wireframe)","img":"assets/images/case-studies/ux-assessment-tool/wire-home.png"},{"title":"Guided Evaluation (Wireframe)","img":"assets/images/case-studies/ux-assessment-tool/wire-evaluation.png"}]'>See the wireframes for the home and evaluation screens<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 - Usability Testing -->
+  <section class="cs-section">
+    <div class="cs-section-inner">
+      <div class="cs-section-label"><p class="eyebrow">06 - Usability Testing</p></div>
+      <div>
+        <h2 class="cs-headline">Testing the guided workflow with real evaluators</h2>
+        <div class="cs-stat-row cs-reveal" style="grid-template-columns: repeat(2, 1fr); max-width: 560px;">
+          <div class="cs-stat"><div class="stat-num" data-count-to="18" data-suffix="">0</div><div class="stat-label">Participants, across 5 locations</div></div>
+          <div class="cs-stat"><div class="stat-num" data-count-to="7" data-suffix="">0</div><div class="stat-label">Core tasks tested, end to end</div></div>
+        </div>
+        <div class="cs-body cs-reveal" style="margin-top: var(--sp-8);">
+          <p>18 practitioners worked through the same 7 core tasks - from creating a new evaluation through to finding and downloading the finished report - each rated on a four-point outcome scale (with ease, with difficulty, with help, failed), alongside a severity breakdown of every finding raised along the way.</p>
+        </div>
+        <div class="cs-reveal" style="margin-top: var(--sp-8);">
+          <button class="p-view" type="button" data-title="Usability Testing Results" data-img="assets/images/case-studies/ux-assessment-tool/usability-testing-results.png" data-lightbox-group="usability-testing">See the full severity breakdown and per-task success rates<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 - A/B Testing -->
+  <section class="cs-section">
+    <div class="cs-section-inner">
+      <div class="cs-section-label"><p class="eyebrow">07 - A/B Testing</p></div>
+      <div>
+        <h2 class="cs-headline">Two directions for the home screen, tested side by side</h2>
+        <div class="cs-body cs-reveal" style="margin-bottom: var(--sp-8);">
+          <p>Two variants of the My Activities home screen were put in front of evaluators to settle open layout questions before locking the visual design.</p>
+        </div>
+        <div class="cs-reveal">
+          <button class="p-view" type="button" data-title="A/B Testing - Home Screen Variants" data-img="assets/images/case-studies/ux-assessment-tool/ab-comparison.png" data-lightbox-group="ab-testing">See Variant A and Variant B compared side by side<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 - Visual Design -->
+  <section class="cs-section">
+    <div class="cs-section-inner">
+      <div class="cs-section-label"><p class="eyebrow">08 - Visual Design</p></div>
+      <div>
+        <h2 class="cs-headline">From wireframe to a finished, on-brand tool</h2>
+        <div class="cs-reveal">
+          <button class="p-view" type="button" data-title="Visual Design" data-lightbox-group="visual-design" data-images='[{"title":"My Activities - Home","img":"assets/images/case-studies/ux-assessment-tool/visual-home.png"},{"title":"Guided Evaluation","img":"assets/images/case-studies/ux-assessment-tool/visual-evaluation.png"},{"title":"Report","img":"assets/images/case-studies/ux-assessment-tool/visual-report.png"}]'>See the finished home, evaluation, and report screens<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        </div>
+        <p class="cs-closing-note cs-reveal">The report screen carries an Overall Score gauge, a per-category (%) breakdown across all 8 heuristic categories, and a VIMM Impact read-out - rating every finding's Visual, Intellect, Motor, and Memory load at a glance.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 09 - Style Guide -->
+  <section class="cs-section">
+    <div class="cs-section-inner">
+      <div class="cs-section-label"><p class="eyebrow">09 - Style Guide</p></div>
+      <div>
+        <h2 class="cs-headline">Built from a single base color, then documented as it grew</h2>
+        <div class="cs-body cs-reveal" style="margin-bottom: var(--sp-8);">
+          <p>The project started with only one base color provided. Everything else - the Midnight Blue and white pairing, a teal accent system for calls to action, typography (Gellix, three heading weights), and every button, form control, and icon in the tool - was built out from there, then documented so the tool stayed heuristically consistent with itself.</p>
+        </div>
+        <div class="cs-reveal">
+          <button class="p-view" type="button" data-title="Style Guide" data-lightbox-group="style-guide" data-images='[{"title":"Typography Guidelines","img":"assets/images/case-studies/ux-assessment-tool/style-typography-guidelines.png"},{"title":"Primary Colors","img":"assets/images/case-studies/ux-assessment-tool/style-primary-colors.png"},{"title":"Secondary Colors &amp; Grayscale","img":"assets/images/case-studies/ux-assessment-tool/style-secondary-colors.png"},{"title":"Backgrounds","img":"assets/images/case-studies/ux-assessment-tool/style-backgrounds.png"},{"title":"Text Styles","img":"assets/images/case-studies/ux-assessment-tool/style-text-styles.png"},{"title":"Buttons &amp; Form Controls","img":"assets/images/case-studies/ux-assessment-tool/style-buttons.png"},{"title":"Icons","img":"assets/images/case-studies/ux-assessment-tool/style-icons.png"}]'>See the full style guide - colors, type, buttons, and icons<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 - Reflection -->
+  <section class="cs-section">
+    <div class="cs-section-inner">
+      <div class="cs-section-label"><p class="eyebrow">10 - Reflection</p></div>
+      <div>
+        <h2 class="cs-headline">What this project reinforced for me</h2>
+        <div class="cs-reflect-grid cs-reveal">
+          <div class="reflect-card">
+            <p class="num">01</p>
+            <h4>Structure beats a blank page</h4>
+            <p>Giving evaluators a guided question set, not a checklist, was what actually made unfamiliar domains approachable.</p>
+          </div>
+          <div class="reflect-card">
+            <p class="num">02</p>
+            <h4>The report is part of the design</h4>
+            <p>Deciding the output format - score, category chart, VIMM impact - early on shaped what the evaluation flow needed to capture, not the other way round.</p>
+          </div>
+          <div class="reflect-card">
+            <p class="num">03</p>
+            <h4>A style guide pays for itself fast</h4>
+            <p>Building the tool's own style guide early made every later screen faster to design, and kept the tool itself consistent with the heuristics it was built to check for.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLOSING -->
+  <section class="cs-closing">
+    <p class="eyebrow" style="margin-bottom: var(--sp-5);">Thank you</p>
+    <h2>Happy to walk through the evaluation logic, the style guide, or any of the screens in more detail.</h2>
+    <p>Reach out and I'll walk you through it.</p>
+    <span class="magnetic-wrap">
+      <a class="btn btn-primary" data-magnetic href="index.html#contact">Get in touch</a>
+    </span>
+  </section>
+
+  <!-- More case studies -->
+  <div class="cs-next cs-next-double">
+    <a class="cs-next-card" href="next-gen-contact-center.html" style="text-decoration:none;">
+      <p class="eyebrow">More work</p>
+      <h3>Next Gen Contact Center Web App</h3>
+      <p>Unifying two legacy platforms into one AI-orchestrated desktop for 35,000+ support representatives.</p>
+    </a>
+    <a class="cs-next-card" href="reimagining-employee-center.html" style="text-decoration:none;">
+      <p class="eyebrow">More work</p>
+      <h3>Reimagining Employee Center</h3>
+      <p>Transforming an app-centric employee center into an information-centric, mobile-first experience.</p>
+    </a>
+  </div>
+
+</main>
+
+<!-- Lightbox - click-to-expand viewer, shared by Wireframes / Visual Design /
+     Usability Testing / A/B Testing. Matches the .p-view + light-card-modal
+     pattern from the Next Gen Contact Center presentation deck. Each
+     .p-view button carries data-title/data-img/data-lightbox-group; prev/next
+     in the footer cycles through every button sharing that group, in DOM order. -->
+<div class="lightbox" id="cs-lightbox" aria-hidden="true">
+  <div class="lightbox-backdrop" data-lightbox-close></div>
+  <div class="lightbox-panel" role="dialog" aria-modal="true" aria-labelledby="cs-lightbox-title">
+    <div class="lightbox-head">
+      <h3 id="cs-lightbox-title"></h3>
+      <button class="lightbox-close" type="button" data-lightbox-close aria-label="Close"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    </div>
+    <div class="lightbox-body">
+      <img src="" alt="">
+    </div>
+    <div class="lightbox-foot"></div>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <span>&copy; <span id="year"></span> Pavithran P.</span>
+  <div class="footer-links">
+    <a href="https://www.linkedin.com/in/pavithrandesigns/" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="mailto:ppavithran@outlook.com">Email</a>
+    <a class="back-to-top" href="#main">Back to top ↑</a>
+  </div>
+</footer>
+
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/case-study.js"></script>
+<script>
+(function () {
+  var lb = document.getElementById('cs-lightbox');
+  if (!lb) return;
+  var titleEl = lb.querySelector('.lightbox-head h3');
+  var bodyImg = lb.querySelector('.lightbox-body img');
+  var footEl = lb.querySelector('.lightbox-foot');
+
+  var ARROW_LEFT = '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  var ARROW_RIGHT = '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+  var currentList = [];
+  var currentIndex = 0;
+
+  function readList(btn) {
+    var raw = btn.getAttribute('data-images');
+    if (raw) {
+      try {
+        var parsed = JSON.parse(raw);
+        if (parsed && parsed.length) return parsed;
+      } catch (e) { /* fall through to single-image case */ }
+    }
+    return [{ title: btn.getAttribute('data-title') || '', img: btn.getAttribute('data-img') }];
+  }
+
+  function renderFoot() {
+    if (currentList.length < 2) { footEl.innerHTML = ''; return; }
+    var dots = currentList.map(function (c, i) {
+      return '<button class="concept-nav-dot' + (i === currentIndex ? ' is-active' : '') + '" type="button" data-nav-dot="' + i + '" aria-label="Go to ' + c.title + '"></button>';
+    }).join('');
+    footEl.innerHTML = '<div class="concept-nav">' +
+      '<button class="concept-nav-arrow" type="button" data-nav="prev" aria-label="Previous image">' + ARROW_LEFT + '</button>' +
+      '<div class="concept-nav-dots">' + dots + '</div>' +
+      '<button class="concept-nav-arrow" type="button" data-nav="next" aria-label="Next image">' + ARROW_RIGHT + '</button>' +
+      '</div>';
+  }
+
+  function render() {
+    var item = currentList[currentIndex];
+    if (!item) return;
+    titleEl.textContent = item.title;
+    bodyImg.src = item.img;
+    bodyImg.alt = item.title;
+    renderFoot();
+  }
+
+  function open(list, index) {
+    currentList = list;
+    currentIndex = index < 0 ? 0 : index;
+    render();
+    lb.classList.add('is-open');
+    lb.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function close() {
+    lb.classList.remove('is-open');
+    lb.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  function step(delta) {
+    if (!currentList.length) return;
+    currentIndex = (currentIndex + delta + currentList.length) % currentList.length;
+    render();
+  }
+
+  document.querySelectorAll('.p-view').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      open(readList(btn), 0);
+    });
+  });
+
+  footEl.addEventListener('click', function (e) {
+    var navBtn = e.target.closest('[data-nav]');
+    if (navBtn) { step(navBtn.getAttribute('data-nav') === 'next' ? 1 : -1); return; }
+    var dotBtn = e.target.closest('[data-nav-dot]');
+    if (dotBtn) { currentIndex = parseInt(dotBtn.getAttribute('data-nav-dot'), 10); render(); }
+  });
+
+  lb.querySelectorAll('[data-lightbox-close]').forEach(function (el) {
+    el.addEventListener('click', close);
+  });
+  document.addEventListener('keydown', function (e) {
+    if (!lb.classList.contains('is-open')) return;
+    if (e.key === 'Escape') close();
+    if (e.key === 'ArrowLeft') step(-1);
+    if (e.key === 'ArrowRight') step(1);
+  });
+})();
+</script>
+</body>
+</html>

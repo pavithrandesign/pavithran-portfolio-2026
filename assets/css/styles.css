@@ -655,7 +655,7 @@ body.has-custom-cursor .featured-work { cursor: none; }
   border-top: 1px solid var(--border-hairline);
 }
 .cs-meta-item .eyebrow { margin-bottom: var(--sp-2); }
-.cs-meta-item p { font-size: var(--fs-small); max-width: 26ch; }
+.cs-meta-item p { font-size: var(--fs-small); max-width: 26ch; color: var(--text-secondary); }
 
 .cs-cover {
   max-width: var(--container);
@@ -816,12 +816,14 @@ body.has-custom-cursor .featured-work { cursor: none; }
 .cs-next-card p { color: var(--text-tertiary); font-size: var(--fs-small); max-width: 48ch; margin: 0 auto; }
 a.cs-next-card { display: block; transition: border-color var(--dur-fast) var(--ease-out), background var(--dur-fast) var(--ease-out); }
 a.cs-next-card:hover { border-color: var(--grey-300); background: var(--grey-50); }
+.cs-next-double { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-6); }
 
 @media (max-width: 900px) {
   .cs-section-inner { grid-template-columns: 1fr; gap: var(--sp-5); }
   .cs-section-label { position: static; }
   .cs-stat-row, .cs-before-after, .cs-persona-grid, .cs-quote-grid, .cs-recs-grid, .cs-reflect-grid { grid-template-columns: 1fr; }
   .timeline-item { grid-template-columns: 1fr; gap: var(--sp-2); }
+  .cs-next-double { grid-template-columns: 1fr; }
 }
 
 .cs-reveal {
@@ -854,6 +856,15 @@ a.cs-next-card:hover { border-color: var(--grey-300); background: var(--grey-50)
   }
   ::view-transition-old(cs-reimagining-employee-center-title),
   ::view-transition-new(cs-reimagining-employee-center-title) {
+    animation-duration: 0.5s;
+  }
+  ::view-transition-old(cs-ux-assessment-tool-media),
+  ::view-transition-new(cs-ux-assessment-tool-media) {
+    animation-duration: 0.6s;
+    animation-timing-function: cubic-bezier(0.65, 0, 0.35, 1);
+  }
+  ::view-transition-old(cs-ux-assessment-tool-title),
+  ::view-transition-new(cs-ux-assessment-tool-title) {
     animation-duration: 0.5s;
   }
 }

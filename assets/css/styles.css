@@ -509,7 +509,16 @@ body.has-custom-cursor .featured-work { cursor: none; }
 /* Hero + grid layout: first .featured-work stays full-width (.hero), the
    next two sit side-by-side in .work-grid, sharing a row. Values matched
    to the approved preview exactly. */
-.featured-work.hero .featured-media { min-height: 380px; }
+/* Case 1 (hero) only: its cover image is a wide/short screenshot
+   (1596x490) with a very different ratio than the text column next to
+   it, so it should NOT stretch to match the content column's height
+   like case 2/3 do with each other. Size the media box to its own
+   natural aspect ratio and center it in the row instead. */
+.featured-work.hero .featured-media {
+  align-self: center;
+  aspect-ratio: 1596 / 490;
+  min-height: 0;
+}
 
 .work-grid {
   display: grid;

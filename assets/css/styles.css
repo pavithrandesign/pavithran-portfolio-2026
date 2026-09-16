@@ -506,6 +506,32 @@ body.has-custom-cursor .featured-work { cursor: none; }
 .featured-work:hover .featured-link { gap: var(--sp-4); }
 .featured-link svg { width: 15px; height: 15px; }
 
+/* Hero + grid layout: first .featured-work stays full-width (.hero), the
+   next two sit side-by-side in .work-grid, sharing a row. */
+.work-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-5);
+  align-items: stretch;
+}
+.work-grid .featured-work {
+  grid-template-columns: 1fr;
+  display: flex;
+  flex-direction: column;
+}
+.work-grid .featured-media {
+  min-height: 220px;
+  flex: 0 0 220px;
+}
+.work-grid .featured-content {
+  flex: 1 1 auto;
+  padding: var(--sp-6) var(--sp-6);
+  justify-content: flex-start;
+}
+.work-grid .featured-content h3 { font-size: var(--fs-h3); margin-bottom: var(--sp-3); }
+.work-grid .featured-content p { font-size: var(--fs-small); margin-bottom: var(--sp-5); }
+.work-grid .featured-link { margin-top: auto; }
+
 /* ==========================================================================
    Contact section — two columns: message + contact options
    ========================================================================== */
@@ -617,6 +643,7 @@ body.has-custom-cursor .featured-work { cursor: none; }
 @media (max-width: 1024px) {
   .featured-work { grid-template-columns: 1fr; }
   .featured-media { min-height: 320px; }
+  .work-grid { grid-template-columns: 1fr; }
   .contact-section { grid-template-columns: 1fr; }
 }
 @media (max-width: 640px) {

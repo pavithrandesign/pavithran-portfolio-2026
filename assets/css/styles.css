@@ -509,16 +509,11 @@ body.has-custom-cursor .featured-work { cursor: none; }
 /* Hero + grid layout: first .featured-work stays full-width (.hero), the
    next two sit side-by-side in .work-grid, sharing a row. Values matched
    to the approved preview exactly. */
-/* Case 1 (hero) only: its cover image is a wide/short screenshot
-   (1596x490) with a very different ratio than the text column next to
-   it, so it should NOT stretch to match the content column's height
-   like case 2/3 do with each other. Size the media box to its own
-   natural aspect ratio and center it in the row instead. */
-.featured-work.hero .featured-media {
-  align-self: center;
-  aspect-ratio: 3192 / 1492;
-  min-height: 0;
-}
+/* Case 1 (hero): media box stays the same fixed height as the plain
+   card component (matches the original stacked-layout card exactly),
+   but uses object-fit: contain instead of cover so the cover image
+   is never cropped -- it letterboxes on the card's own black bg. */
+.featured-work.hero .featured-media img { object-fit: contain; }
 
 .work-grid {
   display: grid;

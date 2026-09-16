@@ -516,7 +516,7 @@ body.has-custom-cursor .featured-work { cursor: none; }
    natural aspect ratio and center it in the row instead. */
 .featured-work.hero .featured-media {
   align-self: center;
-  aspect-ratio: 1596 / 490;
+  aspect-ratio: 3192 / 1492;
   min-height: 0;
 }
 

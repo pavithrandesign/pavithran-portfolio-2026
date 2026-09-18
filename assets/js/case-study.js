@@ -1,5 +1,5 @@
 /* ==========================================================================
-   PAVI — Case study page enhancements
+   PAVI: Case study page enhancements
    Line-by-line headline reveal on scroll (soft fade + slide), loaded
    in addition to main.js on every case-study-*.html page.
    ========================================================================== */
@@ -49,7 +49,7 @@
     blocks.forEach((b) => io.observe(b));
   }
 
-  // Scrollspy — highlights the .nav-link whose target section is currently
+  // Scrollspy: highlights the .nav-link whose target section is currently
   // in view. Matches links (href="#id") to sections (id="id") automatically,
   // so any case study can opt in just by adding a .nav-links submenu with
   // anchors that point at real section ids.

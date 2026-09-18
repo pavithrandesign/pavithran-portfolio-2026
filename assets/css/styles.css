@@ -1,7 +1,7 @@
 /* ==========================================================================
-   PAVI — Design System
+   PAVI: Design System
    Monochrome, flat, Apple-adjacent. Black / White / Cool Neutral Grey.
-   Typography: Manrope, everywhere — UI, body, and display.
+   Typography: Manrope, everywhere: UI, body, and display.
    ========================================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
@@ -11,7 +11,7 @@
   --black: #0a0a0a;
   --white: #ffffff;
   --grey-25: #fbfbfc;
-  --grey-50: #f5f5f7;   /* cool neutral — Apple-adjacent */
+  --grey-50: #f5f5f7;   /* cool neutral, Apple-adjacent */
   --grey-100: #ececee;
   --grey-200: #dedee1;
   --grey-300: #c6c6ca;
@@ -36,8 +36,8 @@
   --fs-hero: clamp(2.75rem, 3.2rem + 3.2vw, 6.25rem);
   --fs-display: clamp(2.1rem, 2rem + 2.4vw, 4rem);
   --fs-h2: clamp(1.5rem, 1.3rem + 1.2vw, 2.25rem);
-  --fs-cs-headline: clamp(1.75rem, 1.6rem + 1.8vw, 2.75rem); /* case-study section headlines — smaller than --fs-display */
-  --fs-cs-stat: clamp(1.5rem, 1.4rem + 1.6vw, 2.5rem); /* case-study stat numbers — smaller than --fs-cs-headline */
+  --fs-cs-headline: clamp(1.75rem, 1.6rem + 1.8vw, 2.75rem); /* case-study section headlines, smaller than --fs-display */
+  --fs-cs-stat: clamp(1.5rem, 1.4rem + 1.6vw, 2.5rem); /* case-study stat numbers, smaller than --fs-cs-headline */
   --fs-h3: clamp(1.15rem, 1.05rem + 0.5vw, 1.5rem);
   --fs-body-lg: clamp(1.05rem, 1rem + 0.3vw, 1.3rem);
   --fs-body: 1rem;
@@ -124,8 +124,7 @@ h1, h2, h3, h4 { font-weight: 500; letter-spacing: -0.02em; }
 .eyebrow {
   font-size: var(--fs-micro);
   font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  letter-spacing: 0.02em;
   color: var(--text-tertiary);
 }
 
@@ -145,7 +144,7 @@ h1, h2, h3, h4 { font-weight: 500; letter-spacing: -0.02em; }
 .skip-link:focus { top: var(--sp-4); }
 
 /* ==========================================================================
-   Custom Cursor (concentric dot + outline) — desktop / fine pointer only
+   Custom Cursor (concentric dot + outline): desktop / fine pointer only
    ========================================================================== */
 .cursor-dot,
 .cursor-ring {
@@ -293,7 +292,7 @@ body.has-custom-cursor .featured-work { cursor: none; }
   margin: 0 auto;
 }
 
-/* Scroll cue — sits in the open space beside the hero text, quiet by design */
+/* Scroll cue: sits in the open space beside the hero text, quiet by design */
 .hero-scroll-cue {
   position: absolute;
   left: 75%;
@@ -329,7 +328,7 @@ body.has-custom-cursor .featured-work { cursor: none; }
 @media (max-width: 1180px) { .hero-scroll-cue { display: none; } }
 @media (prefers-reduced-motion: reduce) { .hero-scroll-cue .cue-line { animation: none; } }
 
-/* Name — the dominant element in the hero */
+/* Name: the dominant element in the hero */
 .hero-name {
   font-family: var(--font-sans);
   font-weight: 700;
@@ -346,7 +345,7 @@ body.has-custom-cursor .featured-work { cursor: none; }
 .is-loaded .hero-name .line span { transform: translateY(0); }
 .hero-name .line:nth-child(1) span { transition-delay: 0.05s; }
 
-/* Rotating role — second-largest beat, sits right under the name */
+/* Rotating role: second-largest beat, sits right under the name */
 .hero-role-wrap {
   margin-top: var(--sp-3);
   overflow: hidden;
@@ -377,7 +376,7 @@ body.has-custom-cursor .featured-work { cursor: none; }
 .hero-role-wrap .role-rotator span.is-active { opacity: 1; transform: translateY(0); }
 .hero-role-wrap .role-rotator span.is-exiting { opacity: 0; transform: translateY(-20px); }
 
-/* Fact rows — 5 YOE / Verizon / Cognizant, then M.Des — sit right under the role */
+/* Fact rows: 5 YOE / Verizon / Cognizant, then M.Des, sit right under the role */
 .hero-facts {
   margin-top: var(--sp-6);
   display: flex;
@@ -415,7 +414,7 @@ body.has-custom-cursor .featured-work { cursor: none; }
 .hero-caption.hero-philosophy { color: var(--text-secondary); font-weight: 500; }
 
 /* ==========================================================================
-   Featured Work — editorial split layout (no grid, single case study)
+   Featured Work: editorial split layout (no grid, single case study)
    ========================================================================== */
 .work-section { padding: var(--sp-10) var(--gutter) var(--sp-16); max-width: var(--container); margin: 0 auto; }
 .work-label { margin-bottom: var(--sp-6); }
@@ -507,7 +506,7 @@ body.has-custom-cursor .featured-work { cursor: none; }
 .featured-link svg { width: 15px; height: 15px; }
 
 /* ==========================================================================
-   Contact section — two columns: message + contact options
+   Contact section: two columns, message + contact options
    ========================================================================== */
 .contact-section {
   padding: var(--sp-16) var(--gutter);
@@ -721,7 +720,7 @@ body.has-custom-cursor .featured-work { cursor: none; }
 .ba-card ul { display: flex; flex-direction: column; gap: var(--sp-3); font-size: var(--fs-small); }
 .ba-card li { padding-left: var(--sp-4); position: relative; color: var(--text-secondary); }
 .ba-card.ba-after li { color: var(--grey-300); }
-.ba-card li::before { content: '—'; position: absolute; left: 0; color: var(--text-tertiary); }
+.ba-card li::before { content: '·'; position: absolute; left: 0; color: var(--text-tertiary); }
 
 .cs-numbered-list { display: flex; flex-direction: column; gap: var(--sp-6); margin-top: var(--sp-8); }
 .numbered-item { display: grid; grid-template-columns: 3rem 1fr; gap: var(--sp-5); }

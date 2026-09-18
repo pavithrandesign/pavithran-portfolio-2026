@@ -1,5 +1,5 @@
 /* ==========================================================================
-   PAVI — Shared interaction engine
+   PAVI: Shared interaction engine
    Cursor, magnetic buttons, featured-work reveal + tilt, role rotators,
    count-up numbers, nav scroll behavior, copy-to-clipboard.
    Loaded on every page. Case-study-only scroll reveal lives in case-study.js.
@@ -12,7 +12,7 @@
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* ------------------------------------------------------------------ *
-   * 1. Custom cursor — concentric dot + outline ring
+   * 1. Custom cursor: concentric dot + outline ring
    * ------------------------------------------------------------------ */
   function initCursor() {
     if (!isFinePointer) return;
@@ -70,7 +70,7 @@
   }
 
   /* ------------------------------------------------------------------ *
-   * 2. Magnetic buttons — pull toward cursor within bounds
+   * 2. Magnetic buttons: pull toward cursor within bounds
    * ------------------------------------------------------------------ */
   function initMagnetic() {
     if (!isFinePointer || prefersReducedMotion) return;
@@ -95,7 +95,7 @@
   }
 
   /* ------------------------------------------------------------------ *
-   * 3. Nav scroll behavior — background on scroll, hide on scroll down
+   * 3. Nav scroll behavior: background on scroll, hide on scroll down
    * ------------------------------------------------------------------ */
   function initNav() {
     const nav = document.querySelector('.site-nav');
@@ -128,9 +128,9 @@
   }
 
   /* ------------------------------------------------------------------ *
-   * 5. Featured Work — entrance reveal + subtle tilt (no bento grid)
+   * 5. Featured Work: entrance reveal + subtle tilt (no bento grid)
    *    There can be more than one .featured-work card stacked on the
-   *    homepage — each gets its own independent observer/tilt.
+   *    homepage; each gets its own independent observer/tilt.
    * ------------------------------------------------------------------ */
   function initFeaturedWork() {
     const cards = document.querySelectorAll('.featured-work');
@@ -166,7 +166,7 @@
   }
 
   /* ------------------------------------------------------------------ *
-   * 6. Role rotators — hero "what I do".
+   * 6. Role rotators: hero "what I do".
    *    Every .role-rotator found in the document gets its own independent cycle.
    * ------------------------------------------------------------------ */
   function initRoleRotators(scope) {

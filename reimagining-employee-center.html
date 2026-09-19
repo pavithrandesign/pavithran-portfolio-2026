@@ -24,7 +24,7 @@
   .cs-carousel-track{display:flex;gap:var(--sp-5);overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;-webkit-overflow-scrolling:touch;padding-bottom:var(--sp-2);scrollbar-width:none;}
   .cs-carousel-track::-webkit-scrollbar{display:none;}
   .cs-carousel-slide{flex:0 0 calc((100% - 2 * var(--sp-5)) / 3);scroll-snap-align:start;text-align:center;}
-  .cs-carousel-slide img{width:auto;max-width:100%;height:auto;max-height:520px;margin:0 auto;display:block;border-radius:var(--r-lg);border:1px solid var(--border-hairline);}
+  .cs-carousel-slide img{width:auto;max-width:100%;height:auto;max-height:520px;margin:0 auto;display:block;border:1px solid var(--border-hairline);}
   .cs-carousel-slide figcaption{margin-top:var(--sp-3);font-size:var(--fs-small);color:var(--text-secondary);}
   .cs-carousel-controls{display:flex;align-items:center;justify-content:center;gap:var(--sp-5);margin-top:var(--sp-6);}
   .cs-carousel-arrow{width:44px;height:44px;border-radius:var(--r-pill);border:1px solid var(--border-hairline);background:var(--surface);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text-primary);transition:background .2s ease;}
@@ -39,7 +39,7 @@
   /* Use-case cards: full detail, horizontal swipe/drag strip, no controls. */
   .usecase-scroll{display:flex;gap:var(--sp-4);overflow-x:auto;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;padding-bottom:var(--sp-3);scrollbar-width:none;}
   .usecase-scroll::-webkit-scrollbar{display:none;}
-  .usecase-card{flex:0 0 300px;scroll-snap-align:start;padding:var(--sp-5);border:1px solid var(--border-hairline);border-radius:var(--r-md);}
+  .usecase-card{flex:0 0 300px;scroll-snap-align:start;padding:var(--sp-5);border:1px solid var(--border-hairline);border-radius:var(--r-card);}
   .usecase-card .eyebrow{margin-bottom:var(--sp-2);}
   .usecase-card h4{margin:0 0 var(--sp-2);}
   .usecase-card p:not(.eyebrow){margin:0;color:var(--text-secondary);font-size:var(--fs-small);}
@@ -47,7 +47,7 @@
 
   /* Strategy: four pillars (icon grid) + eight guiding principles (chip grid). */
   .pillar-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--sp-3);}
-  .pillar-card{background:var(--surface-alt);border-radius:var(--r-lg);padding:var(--sp-5) var(--sp-3);text-align:center;}
+  .pillar-card{background:var(--surface-alt);border-radius:var(--r-card);padding:var(--sp-5) var(--sp-3);text-align:center;}
   .pillar-icon{width:40px;height:40px;border-radius:50%;background:var(--black);color:var(--white);display:flex;align-items:center;justify-content:center;margin:0 auto var(--sp-3);}
   .pillar-icon svg{width:19px;height:19px;}
   .pillar-label{font-size:var(--fs-small);font-weight:600;color:var(--text-primary);}
@@ -165,7 +165,7 @@
   </section>
 
   <div class="cs-cover" id="cover" style="view-transition-name: cs-reimagining-employee-center-media;">
-    <img src="assets/images/case-studies/reimagining-employee-center/cover.png" alt="Reimagined employee center, home, insights, profile, and team analytics screens" style="width:100%; border-radius: var(--r-xl); display:block;">
+    <img src="assets/images/case-studies/reimagining-employee-center/cover.png" alt="Reimagined employee center, home, insights, profile, and team analytics screens" style="width:100%; border-radius: var(--r-card); display:block;">
   </div>
 
   <!-- 01: Overview -->

@@ -51,6 +51,7 @@
     --r-lg: 28px;
     --r-xl: 36px;
     --r-pill: 999px;
+    --r-card: 12px;
 
     --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   }
@@ -143,7 +144,7 @@
   .two-col li::before { content: '-'; position: absolute; left: 0; color: var(--text-tertiary); }
 
   .quote-box {
-    background: var(--grey-50); border-radius: var(--r-lg); padding: var(--sp-6);
+    background: var(--grey-50); border-radius: var(--r-card); padding: var(--sp-6);
     max-width: 74ch; margin: var(--sp-5) 0;
   }
   .quote-box blockquote { font-size: var(--fs-h3); font-weight: 500; line-height: 1.4; margin-bottom: var(--sp-3); }
@@ -151,21 +152,21 @@
 
   .vision-band {
     background: var(--black); color: var(--white);
-    border-radius: var(--r-xl); padding: var(--sp-7) var(--sp-8);
+    border-radius: var(--r-card); padding: var(--sp-7) var(--sp-8);
     max-width: 1000px; margin-top: var(--sp-3);
   }
   .vision-band .flag-projected { background: transparent; color: var(--grey-400); border-color: var(--grey-700); }
   .vision-band .stat-row .lbl { color: var(--grey-500); }
 
   .shipped-band {
-    background: var(--grey-50); border-radius: var(--r-xl); padding: var(--sp-7) var(--sp-8);
+    background: var(--grey-50); border-radius: var(--r-card); padding: var(--sp-7) var(--sp-8);
     max-width: 1000px; margin-top: var(--sp-3);
   }
 
   .impact-split { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-6); max-width: 1080px; margin-top: var(--sp-6); }
 
   .priority-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-5); margin-top: var(--sp-6); max-width: 1180px; }
-  .priority-card { background: var(--grey-50); border-radius: var(--r-lg); padding: var(--sp-5); }
+  .priority-card { background: var(--grey-50); border-radius: var(--r-card); padding: var(--sp-5); }
   .priority-card h4 { font-size: var(--fs-body-lg); font-weight: 600; margin-bottom: var(--sp-2); }
   .priority-card p.desc { font-size: var(--fs-small); color: var(--text-secondary); margin-bottom: var(--sp-4); }
   .priority-card ul { display: flex; flex-flow: row wrap; gap: 6px; }
@@ -177,7 +178,7 @@
 
   /* ---- Problem / Opportunity - bare inline icons, matching ba-icon-list ---- */
   .problem-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-5); margin: var(--sp-6) 0; max-width: 1180px; }
-  .problem-card { background: var(--grey-50); border-radius: var(--r-lg); padding: var(--sp-6); }
+  .problem-card { background: var(--grey-50); border-radius: var(--r-card); padding: var(--sp-6); }
   .problem-card { position: relative; }
   .p-head { display: flex; align-items: center; gap: var(--sp-3); }
   .p-icon { flex-shrink: 0; color: var(--text-primary); }
@@ -203,7 +204,7 @@
   .recognition-note p { font-size: var(--fs-body); color: var(--text-secondary); max-width: 640px; }
 
   .cap-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-5); margin: var(--sp-6) 0; max-width: 1180px; }
-  .cap-col { background: var(--grey-50); border-radius: var(--r-lg); padding: var(--sp-6); display: flex; flex-direction: column; }
+  .cap-col { background: var(--grey-50); border-radius: var(--r-card); padding: var(--sp-6); display: flex; flex-direction: column; }
   .cap-col .p-head { margin-bottom: var(--sp-4); }
   .cap-item { padding-top: var(--sp-4); border-top: 1px solid var(--border-hairline); }
   .p-head + .cap-item { padding-top: 0; border-top: none; }
@@ -214,7 +215,7 @@
   .lightbox.is-open { display: flex; }
   .lightbox-backdrop { position: absolute; inset: 0; background: rgba(10,10,10,0.6); }
   .lightbox-panel {
-    position: relative; background: var(--white); border: 1px solid var(--border-hairline); border-radius: var(--r-lg);
+    position: relative; background: var(--white); border: 1px solid var(--border-hairline); border-radius: var(--r-card);
     max-width: min(1220px, 95vw); max-height: 88vh; width: 100%; display: flex; flex-direction: column; overflow: hidden;
     box-shadow: 0 30px 70px rgba(10,10,10,0.28);
   }
@@ -389,7 +390,7 @@
   .contrib-body { display: flex; flex-direction: column; gap: var(--sp-7); }
   .contrib-section h4 { font-size: var(--fs-small); font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-tertiary); margin-bottom: var(--sp-3); }
   .contrib-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-5); }
-  .contrib-card { background: var(--grey-50); border-radius: var(--r-md); padding: var(--sp-5); }
+  .contrib-card { background: var(--grey-50); border-radius: var(--r-card); padding: var(--sp-5); }
   .contrib-card p { font-size: var(--fs-small); color: var(--text-secondary); line-height: 1.5; }
   .contrib-card .contrib-label { font-size: var(--fs-micro); font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-tertiary); margin-bottom: var(--sp-3); display: block; }
   .contrib-card .contrib-headline { font-size: var(--fs-body-lg); font-weight: 600; margin-bottom: 6px; line-height: 1.25; }
@@ -475,7 +476,7 @@
   #pw-gate-card {
     width: 100%; max-width: 380px; text-align: center;
     background: #141414; border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 20px; padding: 40px 32px;
+    border-radius: 12px; padding: 40px 32px;
   }
   #pw-gate-eyebrow {
     font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;

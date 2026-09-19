@@ -12,64 +12,6 @@
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* ------------------------------------------------------------------ *
-   * 1. Custom cursor: concentric dot + outline ring
-   * ------------------------------------------------------------------ */
-  function initCursor() {
-    if (!isFinePointer) return;
-
-    document.body.classList.add('has-custom-cursor');
-
-    const dot = document.createElement('div');
-    dot.className = 'cursor-dot';
-    const ring = document.createElement('div');
-    ring.className = 'cursor-ring';
-    document.body.append(dot, ring);
-
-    let mouseX = window.innerWidth / 2;
-    let mouseY = window.innerHeight / 2;
-    let ringX = mouseX;
-    let ringY = mouseY;
-
-    window.addEventListener('mousemove', (e) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-      dot.style.transform = `translate(${mouseX}px, ${mouseY}px) translate(-50%, -50%)`;
-      dot.classList.remove('is-hidden');
-      ring.classList.remove('is-hidden');
-    });
-
-    document.addEventListener('mouseleave', () => {
-      dot.classList.add('is-hidden');
-      ring.classList.add('is-hidden');
-    });
-
-    function tick() {
-      ringX += (mouseX - ringX) * 0.18;
-      ringY += (mouseY - ringY) * 0.18;
-      ring.style.transform = `translate(${ringX}px, ${ringY}px) translate(-50%, -50%)`;
-      requestAnimationFrame(tick);
-    }
-    requestAnimationFrame(tick);
-
-    const hoverTargets = 'a, button, .featured-work, input, textarea, [data-cursor-hover]';
-    document.addEventListener('mouseover', (e) => {
-      const target = e.target.closest(hoverTargets);
-      if (!target) return;
-      ring.classList.add('is-hovering');
-      if (target.closest('[data-cursor-dark]')) {
-        ring.classList.add('is-dark');
-        dot.classList.add('is-dark');
-      }
-    });
-    document.addEventListener('mouseout', (e) => {
-      const target = e.target.closest(hoverTargets);
-      if (!target) return;
-      ring.classList.remove('is-hovering', 'is-dark');
-      dot.classList.remove('is-dark');
-    });
-  }
-
-  /* ------------------------------------------------------------------ *
    * 2. Magnetic buttons: pull toward cursor within bounds
    * ------------------------------------------------------------------ */
   function initMagnetic() {
@@ -248,7 +190,6 @@
   /* ------------------------------------------------------------------ */
   document.addEventListener('DOMContentLoaded', () => {
     initHeroReveal();
-    initCursor();
     initMagnetic();
     initNav();
     initFeaturedWork();

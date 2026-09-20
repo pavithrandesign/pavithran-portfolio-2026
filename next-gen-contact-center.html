@@ -503,6 +503,24 @@
   .cover-meta p { font-size: var(--fs-small); color: var(--text-secondary); max-width: 30ch; }
 
   .closing .headline { max-width: 21ch; }
+  .closing .cs-next { margin-top: var(--sp-8); max-width: 720px; }
+  .closing .cs-next > .eyebrow { margin-bottom: var(--sp-4); }
+  .closing .cs-next-double { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-5); }
+  .cs-next-card {
+    display: block; text-decoration: none;
+    border-radius: var(--r-lg);
+    border: 1.5px dashed var(--grey-200);
+    background: var(--grey-25);
+    padding: var(--sp-7) var(--sp-6);
+    text-align: center;
+    transition: border-color .2s var(--ease-out), background .2s var(--ease-out);
+  }
+  .cs-next-card:hover { border-color: var(--grey-300); background: var(--grey-50); }
+  .cs-next-card h3 { font-size: var(--fs-h3); font-weight: 600; letter-spacing: -0.01em; margin-bottom: var(--sp-2); color: var(--text-primary); }
+  .cs-next-card p { color: var(--text-tertiary); font-size: var(--fs-small); max-width: 42ch; margin: 0 auto; }
+  @media (max-width: 640px) {
+    .closing .cs-next-double { grid-template-columns: 1fr; }
+  }
 
   @media (max-width: 1000px) {
     .mobile-bar { display: flex; }
@@ -1165,6 +1183,19 @@
       <p class="eyebrow">Thank You</p>
       <h2 class="headline">Happy to go deeper on any part of this.</h2>
       <p class="sub">The research, a specific trade-off, the POC and field-visit moment or where I'd take this next - over to you.</p>
+      <div class="cs-next">
+        <p class="eyebrow">More work</p>
+        <div class="cs-next-double">
+          <a class="cs-next-card" href="reimagining-employee-center.html">
+            <h3>Reimagining Employee Center</h3>
+            <p>Transforming an app-centric employee center into an information-centric, mobile-first experience.</p>
+          </a>
+          <a class="cs-next-card" href="ux-assessment-tool.html">
+            <h3>UX Assessment Tool</h3>
+            <p>Turning heuristic evaluation into a guided workflow with domain-aware questions, severity scoring, and an auto-generated report.</p>
+          </a>
+        </div>
+      </div>
     </section>
 
   </main>

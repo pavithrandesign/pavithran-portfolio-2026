@@ -85,7 +85,7 @@
   .rail-head { margin-bottom: var(--sp-6); }
   .rail-head h1 { font-size: 0.95rem; line-height: 1.3; font-weight: 700; letter-spacing: -0.01em; }
 
-  .rail-agenda { list-style: none; display: flex; flex-direction: column; gap: 2px; }
+  .rail-agenda { list-style: none; display: flex; flex-direction: column; gap: 2px; flex: 1; justify-content: center; }
   .rail-agenda a {
     display: block;
     padding: 8px var(--sp-3);
@@ -105,6 +105,14 @@
   .nav-toggle.is-open .icon-open { display: none; }
   .nav-toggle.is-open .icon-close { display: block; }
   .nav-toggle:focus-visible { outline: 2px solid var(--black); outline-offset: 2px; }
+  .rail-contact {
+    margin-top: var(--sp-4); padding-top: var(--sp-4); border-top: 1px solid var(--border-hairline);
+    display: flex; flex-wrap: wrap; align-items: center; gap: var(--sp-2) var(--sp-3);
+    font-size: var(--fs-micro); color: var(--text-tertiary);
+  }
+  .rail-contact a { color: var(--text-secondary); text-decoration: none; }
+  .rail-contact a:hover { color: var(--text-primary); text-decoration: underline; }
+
   .rail-backdrop { display: none; position: fixed; inset: 0; background: rgba(10,10,10,0.4); z-index: 540; opacity: 0; pointer-events: none; transition: opacity var(--dur-fast) var(--ease-out); }
   .rail-backdrop.is-open { display: block; opacity: 1; pointer-events: auto; }
 
@@ -163,6 +171,11 @@
       <li><a href="#style-guide" data-target="style-guide">Style Guide</a></li>
       <li><a href="#reflection" data-target="reflection">Reflection</a></li>
     </ul>
+    <div class="rail-contact">
+      <span>&copy; <span id="rail-year"></span> Pavithran P.</span>
+      <a href="https://www.linkedin.com/in/pavithrandesigns/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="mailto:ppavithran@outlook.com">Email</a>
+    </div>
   </nav>
 
   <main id="main">
@@ -518,7 +531,7 @@
   </div>
 </footer>
 
-<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+<script>document.getElementById('year').textContent = new Date().getFullYear(); document.getElementById('rail-year').textContent = new Date().getFullYear();</script>
 <script src="assets/js/main.js"></script>
 <script src="assets/js/case-study.js"></script>
 <script>

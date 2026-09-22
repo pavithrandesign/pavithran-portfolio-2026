@@ -85,30 +85,111 @@
   .trailer-scroll svg{width:14px;height:14px;}
   @media (max-width:900px){.trailer-grid{grid-template-columns:repeat(2,1fr);}}
   @media (max-width:560px){.trailer-grid{grid-template-columns:1fr;}}
+
+  /* ------------------------------------------------------------------
+     Left rail nav (page-local, replaces the shared .site-nav for this
+     case study; ported from next-gen-contact-center.html's deck rail,
+     reusing this page's own shared design tokens directly since this
+     file already links styles.css, unlike the standalone deck). */
+  .shell { display: grid; grid-template-columns: 260px 1fr; min-height: 100vh; }
+  .shell > main { min-width: 0; }
+
+  .rail {
+    position: sticky; top: 0; height: 100vh;
+    padding: var(--sp-6) var(--sp-5);
+    border-right: 1px solid var(--border-hairline);
+    display: flex; flex-direction: column;
+    overflow-y: auto;
+  }
+  .rail-head { margin-bottom: var(--sp-6); }
+  .rail-head h1 { font-size: 0.95rem; line-height: 1.3; font-weight: 700; letter-spacing: -0.01em; }
+
+  .rail-agenda { list-style: none; display: flex; flex-direction: column; gap: 2px; }
+  .rail-agenda a {
+    display: block;
+    padding: 8px var(--sp-3);
+    border-radius: var(--r-sm);
+    text-decoration: none; color: var(--text-secondary);
+    font-size: var(--fs-small); font-weight: 500;
+    transition: background var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
+  }
+  .rail-agenda a:hover { background: var(--grey-50); color: var(--text-primary); }
+  .rail-agenda a.is-active { background: var(--black); color: var(--white); }
+  .rail-agenda a:focus-visible { outline: 2px solid var(--black); outline-offset: 2px; }
+
+  .mobile-bar { display: none; align-items: center; justify-content: space-between; padding: var(--sp-3) var(--gutter); border-bottom: 1px solid var(--border-hairline); background: var(--white); position: sticky; top: 0; z-index: 500; }
+  .mobile-bar-title { font-size: 0.9rem; font-weight: 700; letter-spacing: -0.01em; }
+  .nav-toggle { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; flex-shrink: 0; border-radius: var(--r-sm); border: 1px solid var(--border-hairline); background: var(--white); color: var(--text-primary); cursor: pointer; padding: 0; }
+  .nav-toggle .icon-close { display: none; }
+  .nav-toggle.is-open .icon-open { display: none; }
+  .nav-toggle.is-open .icon-close { display: block; }
+  .nav-toggle:focus-visible { outline: 2px solid var(--black); outline-offset: 2px; }
+  .rail-backdrop { display: none; position: fixed; inset: 0; background: rgba(10,10,10,0.4); z-index: 540; opacity: 0; pointer-events: none; transition: opacity var(--dur-fast) var(--ease-out); }
+  .rail-backdrop.is-open { display: block; opacity: 1; pointer-events: auto; }
+
+  /* Section mini-header: numbers removed from the eyebrow text (was "01 · Overview"),
+     and bumped from the shared --fs-micro (0.75rem) up to 1rem to match case 1's deck. */
+  .cs-section-label .eyebrow { font-size: 1rem; }
+  .cs-section-inner { grid-template-columns: 1fr; }
+  .cs-section-label { position: static; margin-bottom: var(--sp-5); }
+
+  @media (max-width: 900px) {
+    .mobile-bar { display: flex; }
+    .shell { grid-template-columns: 1fr; }
+    .rail {
+      position: fixed; top: 0; left: 0; height: 100vh; width: min(300px, 82vw);
+      transform: translateX(-100%);
+      transition: transform .25s var(--ease-out);
+      border-right: 1px solid var(--border-hairline);
+      background: var(--white); z-index: 550;
+    }
+    .rail.is-open { transform: translateX(0); }
+    .cs-section[id] { scroll-margin-top: 64px; }
+  }
 </style>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
 
-<header class="site-nav">
-  <a href="index.html" class="nav-back" aria-label="Back to home">
-    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    Back
-  </a>
-  <nav class="nav-links" aria-label="Case study sections">
-    <a class="nav-link" href="#problem">Problem</a>
-    <a class="nav-link" href="#approach">Approach</a>
-    <a class="nav-link" href="#strategy">Strategy</a>
-    <a class="nav-link" href="#design">Design</a>
-    <a class="nav-link" href="#impact">Impact</a>
+<div class="mobile-bar">
+  <span class="mobile-bar-title">Reimagining Employee Center</span>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="rail" aria-label="Open menu">
+    <svg class="icon-open" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="20" height="20"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+    <svg class="icon-close" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="20" height="20"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+  </button>
+</div>
+<div class="rail-backdrop" data-nav-close></div>
+<div class="shell">
+  <nav class="rail" id="rail">
+    <a href="index.html" class="nav-back" aria-label="Back to home">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Back
+    </a>
+    <div class="rail-head">
+      <h1>Reimagining Employee Center</h1>
+    </div>
+    <ul class="rail-agenda" id="agenda">
+      <li><a href="#overview" data-target="overview">Overview</a></li>
+      <li><a href="#problem" data-target="problem">The Problem</a></li>
+      <li><a href="#approach" data-target="approach">Approach</a></li>
+      <li><a href="#fix" data-target="fix">The Fix</a></li>
+      <li><a href="#research" data-target="research">Research</a></li>
+      <li><a href="#personas" data-target="personas">Personas</a></li>
+      <li><a href="#strategy" data-target="strategy">Strategy</a></li>
+      <li><a href="#use-cases" data-target="use-cases">Use Cases</a></li>
+      <li><a href="#design" data-target="design">Wireframes</a></li>
+      <li><a href="#focus-group-findings" data-target="focus-group-findings">Focus Group Findings</a></li>
+      <li><a href="#visual-design" data-target="visual-design">UI Style &amp; Visual Design</a></li>
+      <li><a href="#mockups" data-target="mockups">Mockups</a></li>
+      <li><a href="#impact" data-target="impact">Impact</a></li>
+      <li><a href="#reflection" data-target="reflection">Reflection</a></li>
+    </ul>
   </nav>
-</header>
 
-<main id="main">
+  <main id="main">
 
   <!-- COVER -->
   <section class="cs-hero">
-    <p class="eyebrow">Case Study · Product Design</p>
     <h1 style="view-transition-name: cs-reimagining-employee-center-title;">Reimagining Employee Center</h1>
     <p class="cs-dek">Transforming an app-centric employee center into an information-centric, mobile-first experience, streamlining access to essential tasks and improving user satisfaction.</p>
     <div class="cs-meta">
@@ -169,10 +250,10 @@
   </div>
 
   <!-- 01: Overview -->
-  <section class="cs-section">
+  <section class="cs-section" id="overview" data-nav="overview">
     <div class="cs-section-inner">
-      <div class="cs-section-label"><p class="eyebrow">01 · Overview</p></div>
       <div>
+        <div class="cs-section-label"><p class="eyebrow">Overview</p></div>
         <h2 class="cs-headline">500+ scattered apps, reimagined as one information-centric home</h2>
         <div class="cs-stat-row cs-reveal">
           <div class="cs-stat"><div class="stat-num" data-count-to="500" data-suffix="+">0+</div><div class="stat-label">Individual apps the old employee center relied on</div></div>
@@ -210,8 +291,8 @@
   <!-- 02: The Problem -->
   <section class="cs-section" id="problem" data-nav="problem">
     <div class="cs-section-inner">
-      <div class="cs-section-label"><p class="eyebrow">02 · The Problem</p></div>
       <div>
+        <div class="cs-section-label"><p class="eyebrow">The Problem</p></div>
         <h2 class="cs-headline">Every task lived behind a different door</h2>
         <div class="cs-numbered-list cs-reveal">
           <div class="numbered-item">
@@ -234,8 +315,8 @@
   <!-- 03: Approach -->
   <section class="cs-section" id="approach" data-nav="approach">
     <div class="cs-section-inner">
-      <div class="cs-section-label"><p class="eyebrow">03 · Approach</p></div>
       <div>
+        <div class="cs-section-label"><p class="eyebrow">Approach</p></div>
         <h2 class="cs-headline">Four phases, from current-state audit to shipped design</h2>
         <div class="cs-numbered-list cs-reveal">
           <div class="numbered-item">
@@ -260,10 +341,10 @@
   </section>
 
   <!-- 04: Before / After -->
-  <section class="cs-section">
+  <section class="cs-section" id="fix" data-nav="fix">
     <div class="cs-section-inner">
-      <div class="cs-section-label"><p class="eyebrow">04 · The Fix</p></div>
       <div>
+        <div class="cs-section-label"><p class="eyebrow">The Fix</p></div>
         <h2 class="cs-headline">From app-centric to information-centric</h2>
         <div class="cs-before-after cs-reveal">
           <div class="ba-card">
@@ -288,10 +369,10 @@
   </section>
 
   <!-- 05: Research -->
-  <section class="cs-section">
+  <section class="cs-section" id="research" data-nav="research">
     <div class="cs-section-inner">
-      <div class="cs-section-label"><p class="eyebrow">05 · Research</p></div>
       <div>
+        <div class="cs-section-label"><p class="eyebrow">Research</p></div>
         <h2 class="cs-headline">Interviews and focus groups, run in parallel</h2>
         <div class="cs-recs-grid cs-reveal">
           <div class="recs-col">
@@ -316,10 +397,10 @@
   </section>
 
   <!-- 06: Personas -->
-  <section class="cs-section">
+  <section class="cs-section" id="personas" data-nav="personas">
     <div class="cs-section-inner">
-      <div class="cs-section-label"><p class="eyebrow">06 · Personas</p></div>
       <div>
+        <div class="cs-section-label"><p class="eyebrow">Personas</p></div>
         <h2 class="cs-headline">Three personas, from first day to team lead</h2>
         <div class="cs-persona-grid cs-reveal">
           <div class="persona-card">
@@ -345,8 +426,8 @@
   <!-- 07: Strategy -->
   <section class="cs-section" id="strategy" data-nav="strategy">
     <div class="cs-section-inner">
-      <div class="cs-section-label"><p class="eyebrow">07 · Strategy</p></div>
       <div>
+        <div class="cs-section-label"><p class="eyebrow">Strategy</p></div>
         <h2 class="cs-headline">Four pillars, eight principles</h2>
         <div class="cs-body cs-reveal">
           <p>Centred around associate profile, location, role, and time of day, every team member receives personalized information tailored to their needs.</p>
@@ -388,10 +469,10 @@
   </section>
 
   <!-- 08: Use Cases -->
-  <section class="cs-section">
+  <section class="cs-section" id="use-cases" data-nav="use-cases">
     <div class="cs-section-inner">
-      <div class="cs-section-label"><p class="eyebrow">08 · Use Cases</p></div>
       <div style="min-width: 0;">
+        <div class="cs-section-label"><p class="eyebrow">Use Cases</p></div>
         <h2 class="cs-headline">Scenarios mapped across every level of the org</h2>
         <div class="usecase-scroll cs-reveal">
           <div class="usecase-card"><p class="eyebrow">New Joinee + Associate</p><h4>Natural language help-desk</h4><p>Say "Hey Assistant!" or reach out by mail or phone to raise a request, by voice or text, for policy help-desk, requests, and software assistance.</p></div>
@@ -415,8 +496,8 @@
   <!-- 09: Wireframes -->
   <section class="cs-section" id="design" data-nav="design">
     <div class="cs-section-inner">
-      <div class="cs-section-label"><p class="eyebrow">09 · Wireframes</p></div>
       <div>
+        <div class="cs-section-label"><p class="eyebrow">Wireframes</p></div>
         <h2 class="cs-headline">Low-fidelity first, to pressure-test the structure</h2>
         <div class="cs-body cs-reveal" style="margin-bottom: var(--sp-8);">
           <p>Home, assistant chat, profile, search, tasks, and team analytics, wireframed early to validate layout and information hierarchy before any visual design.</p>
@@ -441,10 +522,10 @@
   </section>
 
   <!-- 10: Focus Group Findings -->
-  <section class="cs-section">
+  <section class="cs-section" id="focus-group-findings" data-nav="focus-group-findings">
     <div class="cs-section-inner">
-      <div class="cs-section-label"><p class="eyebrow">10 · Focus Group Findings</p></div>
       <div>
+        <div class="cs-section-label"><p class="eyebrow">Focus Group Findings</p></div>
         <h2 class="cs-headline">45 responses: 30 from India, 15 from other locations</h2>
         <div class="cs-body cs-reveal">
           <p>Five focus groups, each followed by a quick System Usability Survey, to hear directly from the people who'd actually use this every day.</p>
@@ -474,10 +555,10 @@
   </section>
 
   <!-- 11: UI Style & Visual Design -->
-  <section class="cs-section">
+  <section class="cs-section" id="visual-design" data-nav="visual-design">
     <div class="cs-section-inner">
-      <div class="cs-section-label"><p class="eyebrow">11 · UI Style &amp; Visual Design</p></div>
       <div>
+        <div class="cs-section-label"><p class="eyebrow">UI Style &amp; Visual Design</p></div>
         <h2 class="cs-headline">Flat design, and an unconventional "fluid card"</h2>
         <div class="cs-recs-grid cs-reveal">
           <div class="recs-col">
@@ -517,10 +598,10 @@
   </section>
 
   <!-- 12: Mockups -->
-  <section class="cs-section">
+  <section class="cs-section" id="mockups" data-nav="mockups">
     <div class="cs-section-inner">
-      <div class="cs-section-label"><p class="eyebrow">12 · Mockups</p></div>
       <div>
+        <div class="cs-section-label"><p class="eyebrow">Mockups</p></div>
         <h2 class="cs-headline">The reimagined home, desktop and mobile</h2>
       </div>
     </div>
@@ -533,8 +614,8 @@
   <!-- 13: Impact -->
   <section class="cs-section" id="impact" data-nav="impact">
     <div class="cs-section-inner">
-      <div class="cs-section-label"><p class="eyebrow">13 · Impact</p></div>
       <div>
+        <div class="cs-section-label"><p class="eyebrow">Impact</p></div>
         <h2 class="cs-headline">Well-received by users and leadership alike</h2>
         <div class="cs-vision-band cs-reveal">
           <span class="vision-flag">Shipped, design validated with users</span>
@@ -550,10 +631,10 @@
   </section>
 
   <!-- 14: Reflection -->
-  <section class="cs-section">
+  <section class="cs-section" id="reflection" data-nav="reflection">
     <div class="cs-section-inner">
-      <div class="cs-section-label"><p class="eyebrow">14 · Reflection</p></div>
       <div>
+        <div class="cs-section-label"><p class="eyebrow">Reflection</p></div>
         <h2 class="cs-headline">What this project reinforced for me</h2>
         <div class="cs-reflect-grid cs-reveal">
           <div class="reflect-card">
@@ -595,7 +676,8 @@
     </a>
   </div>
 
-</main>
+  </main>
+</div>
 
 <footer class="site-footer">
   <span>&copy; <span id="year"></span> Pavithran P.</span>
@@ -609,6 +691,52 @@
 <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 <script src="assets/js/main.js"></script>
 <script src="assets/js/case-study.js"></script>
+<script>
+(function () {
+  var toggle = document.querySelector('.nav-toggle');
+  var rail = document.getElementById('rail');
+  var backdrop = document.querySelector('.rail-backdrop');
+  if (!toggle || !rail || !backdrop) return;
+  function openNav(){
+    rail.classList.add('is-open');
+    backdrop.classList.add('is-open');
+    toggle.classList.add('is-open');
+    toggle.setAttribute('aria-expanded', 'true');
+    toggle.setAttribute('aria-label', 'Close menu');
+  }
+  function closeNav(){
+    rail.classList.remove('is-open');
+    backdrop.classList.remove('is-open');
+    toggle.classList.remove('is-open');
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-label', 'Open menu');
+  }
+  toggle.addEventListener('click', function(){
+    if (rail.classList.contains('is-open')) { closeNav(); } else { openNav(); }
+  });
+  backdrop.addEventListener('click', closeNav);
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeNav(); });
+  Array.prototype.slice.call(rail.querySelectorAll('.rail-agenda a')).forEach(function(a){
+    a.addEventListener('click', closeNav);
+  });
+})();
+
+(function () {
+  var links = Array.prototype.slice.call(document.querySelectorAll('.rail-agenda a'));
+  if (!links.length) return;
+  var sections = links.map(function (l) { return document.getElementById(l.dataset.target); });
+
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        var id = entry.target.id;
+        links.forEach(function (l) { l.classList.toggle('is-active', l.dataset.target === id); });
+      }
+    });
+  }, { root: null, rootMargin: '-50% 0px -50% 0px', threshold: 0 });
+  sections.forEach(function (s) { if (s) io.observe(s); });
+})();
+</script>
 <script>
 (function () {
   function initCarousels() {

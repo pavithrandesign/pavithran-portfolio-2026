@@ -59,76 +59,116 @@
     .cs-mockup-pair img{max-height:none;width:min(100%, 480px);height:auto;}
   }
 
-  /* Contextual link + lightbox modal - matches the pattern used in the
-     Next Gen Contact Center presentation deck (.p-view text+arrow button,
-     light-card modal, prev/next nav in the footer). Every image on this
-     page is hidden behind a short, specific link (e.g. "See the primary
-     color palette") instead of being shown inline; clicking it opens the
-     modal, with prev/next through every link sharing the same
-     data-lightbox-group. */
-  .p-view{
-    display:inline-flex;align-items:center;gap:6px;
-    font-family:inherit;font-size:var(--fs-small);font-weight:600;
-    color:var(--text-primary);cursor:pointer;background:none;border:none;padding:0;text-align:left;
-  }
-  .p-view svg{width:13px;height:13px;display:block;flex-shrink:0;}
-  .p-view:hover{color:var(--text-secondary);}
+  /* Inline image gallery - images shown directly on the page (no click-to-open
+     modal), matching case 1's deck pattern where screenshots sit inline in the
+     flow instead of behind a link. Works for a single image or several. */
+  .cs-gallery{display:grid;grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));gap:var(--sp-5);}
+  .cs-gallery-item{min-width:0;}
+  .cs-gallery-item img{display:block;width:100%;height:auto;border-radius:var(--r-card);border:1px solid var(--border-hairline);}
+  .cs-gallery-item figcaption{margin-top:var(--sp-3);font-size:var(--fs-small);color:var(--text-secondary);}
 
-  .lightbox{position:fixed;inset:0;z-index:200;display:none;align-items:center;justify-content:center;padding:var(--sp-6);}
-  .lightbox.is-open{display:flex;}
-  .lightbox-backdrop{position:absolute;inset:0;background:rgba(10,10,10,.6);}
-  .lightbox-panel{
-    position:relative;background:var(--white);border:1px solid var(--border-hairline);border-radius:var(--r-card);
-    max-width:min(1100px,95vw);max-height:88vh;width:100%;display:flex;flex-direction:column;overflow:hidden;
-    box-shadow:0 30px 70px rgba(10,10,10,.28);
-  }
-  .lightbox-head{display:flex;align-items:center;justify-content:space-between;padding:var(--sp-5) var(--sp-6);border-bottom:1px solid var(--border-hairline);flex-shrink:0;}
-  .lightbox-head h3{font-size:var(--fs-body-lg);font-weight:600;}
-  .lightbox-close{
-    width:32px;height:32px;border-radius:var(--r-pill);border:1px solid var(--grey-200);background:var(--white);
-    display:flex;align-items:center;justify-content:center;color:var(--text-primary);cursor:pointer;flex-shrink:0;
-  }
-  .lightbox-close svg{width:14px;height:14px;}
-  .lightbox-close:hover{border-color:var(--black);}
-  .lightbox-body{padding:var(--sp-6);overflow:auto;background:var(--grey-50);}
-  .lightbox-body img{display:block;width:100%;height:auto;border-radius:var(--r-lg);border:1px solid var(--border-hairline);}
-  .lightbox-foot{flex-shrink:0;padding:var(--sp-5) var(--sp-6);border-top:1px solid var(--border-hairline);background:var(--white);}
-  .lightbox-foot:empty{display:none;}
+  /* ------------------------------------------------------------------
+     Left rail nav (page-local, replaces the shared .site-nav for this
+     case study; matches the pattern now live on reimagining-employee-center.html,
+     itself ported from next-gen-contact-center.html's deck rail). */
+  .shell { display: grid; grid-template-columns: 260px 1fr; min-height: 100vh; }
+  .shell > main { min-width: 0; }
 
-  .concept-nav{display:flex;align-items:center;justify-content:center;gap:var(--sp-5);}
-  .concept-nav-arrow{
-    width:44px;height:44px;border-radius:var(--r-pill);border:1px solid var(--border-hairline);background:var(--white);
-    display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text-primary);transition:background .2s var(--ease-out);
+  .rail {
+    position: sticky; top: 0; height: 100vh;
+    padding: var(--sp-6) var(--sp-5);
+    border-right: 1px solid var(--border-hairline);
+    display: flex; flex-direction: column;
+    overflow-y: auto;
   }
-  .concept-nav-arrow:hover{background:var(--grey-100);}
-  .concept-nav-arrow svg{width:16px;height:16px;}
-  .concept-nav-dots{display:flex;align-items:center;gap:var(--sp-2);}
-  .concept-nav-dot{width:8px;height:8px;border-radius:50%;background:var(--grey-300);border:none;padding:0;cursor:pointer;transition:background .2s var(--ease-out),transform .2s var(--ease-out);}
-  .concept-nav-dot.is-active{background:var(--black);transform:scale(1.3);}
+  .rail .nav-back { color: var(--text-secondary); margin-bottom: var(--sp-4); }
+  .rail-head { margin-bottom: var(--sp-6); }
+  .rail-head h1 { font-size: 0.95rem; line-height: 1.3; font-weight: 700; letter-spacing: -0.01em; }
 
-  @media (max-width:700px){
-    .lightbox-panel{max-height:92vh;}
-    .lightbox-head{padding:var(--sp-4) var(--sp-5);}
-    .lightbox-body{padding:var(--sp-5);}
+  .rail-agenda { list-style: none; display: flex; flex-direction: column; gap: 2px; }
+  .rail-agenda a {
+    display: block;
+    padding: 8px var(--sp-3);
+    border-radius: var(--r-sm);
+    text-decoration: none; color: var(--text-secondary);
+    font-size: var(--fs-small); font-weight: 500;
+    transition: background var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
+  }
+  .rail-agenda a:hover { background: var(--grey-50); color: var(--text-primary); }
+  .rail-agenda a.is-active { background: var(--black); color: var(--white); }
+  .rail-agenda a:focus-visible { outline: 2px solid var(--black); outline-offset: 2px; }
+
+  .mobile-bar { display: none; align-items: center; justify-content: space-between; padding: var(--sp-3) var(--gutter); border-bottom: 1px solid var(--border-hairline); background: var(--white); position: sticky; top: 0; z-index: 500; }
+  .mobile-bar-title { font-size: 0.9rem; font-weight: 700; letter-spacing: -0.01em; }
+  .nav-toggle { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; flex-shrink: 0; border-radius: var(--r-sm); border: 1px solid var(--border-hairline); background: var(--white); color: var(--text-primary); cursor: pointer; padding: 0; }
+  .nav-toggle .icon-close { display: none; }
+  .nav-toggle.is-open .icon-open { display: none; }
+  .nav-toggle.is-open .icon-close { display: block; }
+  .nav-toggle:focus-visible { outline: 2px solid var(--black); outline-offset: 2px; }
+  .rail-backdrop { display: none; position: fixed; inset: 0; background: rgba(10,10,10,0.4); z-index: 540; opacity: 0; pointer-events: none; transition: opacity var(--dur-fast) var(--ease-out); }
+  .rail-backdrop.is-open { display: block; opacity: 1; pointer-events: auto; }
+
+  /* Section mini-header: numbers removed from the eyebrow text (was "01 - Overview"),
+     and bumped from the shared --fs-micro (0.75rem) up to 1rem, and moved to sit
+     directly above the headline instead of a separate sticky left column, all to
+     match the finished pattern on reimagining-employee-center.html / case 1's deck. */
+  .cs-section-label .eyebrow { font-size: 1rem; }
+  .cs-section-inner { grid-template-columns: 1fr; }
+  .cs-section-label { position: static; margin-bottom: var(--sp-5); }
+
+  @media (max-width: 900px) {
+    .mobile-bar { display: flex; }
+    .shell { grid-template-columns: 1fr; }
+    .rail {
+      position: fixed; top: 0; left: 0; height: 100vh; width: min(300px, 82vw);
+      transform: translateX(-100%);
+      transition: transform .25s var(--ease-out);
+      border-right: 1px solid var(--border-hairline);
+      background: var(--white); z-index: 550;
+    }
+    .rail.is-open { transform: translateX(0); }
+    .cs-section[id] { scroll-margin-top: 64px; }
   }
 </style>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
 
-<header class="site-nav">
-  <a href="index.html" class="nav-back" aria-label="Back to home">
-    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    Back
-  </a>
-  <span class="nav-case-name">UX Assessment Tool</span>
-</header>
+<div class="mobile-bar">
+  <span class="mobile-bar-title">UX Assessment Tool</span>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="rail" aria-label="Open menu">
+    <svg class="icon-open" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="20" height="20"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+    <svg class="icon-close" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="20" height="20"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+  </button>
+</div>
+<div class="rail-backdrop" data-nav-close></div>
+<div class="shell">
+  <nav class="rail" id="rail">
+    <a href="index.html" class="nav-back" aria-label="Back to home">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Back
+    </a>
+    <div class="rail-head">
+      <h1>UX Assessment Tool</h1>
+    </div>
+    <ul class="rail-agenda" id="agenda">
+      <li><a href="#overview" data-target="overview">Overview</a></li>
+      <li><a href="#problem" data-target="problem">The Problem</a></li>
+      <li><a href="#research" data-target="research">Research</a></li>
+      <li><a href="#how-it-works" data-target="how-it-works">How It Works</a></li>
+      <li><a href="#wireframes" data-target="wireframes">Wireframes</a></li>
+      <li><a href="#usability-testing" data-target="usability-testing">Usability Testing</a></li>
+      <li><a href="#ab-testing" data-target="ab-testing">A/B Testing</a></li>
+      <li><a href="#visual-design" data-target="visual-design">Visual Design</a></li>
+      <li><a href="#style-guide" data-target="style-guide">Style Guide</a></li>
+      <li><a href="#reflection" data-target="reflection">Reflection</a></li>
+    </ul>
+  </nav>
 
-<main id="main">
+  <main id="main">
 
   <!-- COVER -->
   <section class="cs-hero">
-    <p class="eyebrow">Case Study - UX Research &amp; Product Design</p>
     <h1 style="view-transition-name: cs-ux-assessment-tool-title;">UX Assessment Tool</h1>
     <p class="cs-dek">A tool that turns heuristic evaluation from a blank-page exercise into a guided workflow - domain-aware questions, severity scoring, and an auto-generated report, all in one place.</p>
   </section>
@@ -138,10 +178,10 @@
   </div>
 
   <!-- 01 - Overview -->
-  <section class="cs-section">
+  <section class="cs-section" id="overview" data-nav="overview">
     <div class="cs-section-inner">
-      <div class="cs-section-label"><p class="eyebrow">01 - Overview</p></div>
       <div>
+        <div class="cs-section-label"><p class="eyebrow">Overview</p></div>
         <h2 class="cs-headline">A guided workflow, in place of a blank checklist</h2>
         <div class="cs-stat-row cs-reveal">
           <div class="cs-stat"><div class="stat-num" data-count-to="18" data-suffix="">0</div><div class="stat-label">Practitioners tested the tool, across 5 locations</div></div>
@@ -178,10 +218,10 @@
   </section>
 
   <!-- 02 - The Problem -->
-  <section class="cs-section">
+  <section class="cs-section" id="problem" data-nav="problem">
     <div class="cs-section-inner">
-      <div class="cs-section-label"><p class="eyebrow">02 - The Problem</p></div>
       <div>
+        <div class="cs-section-label"><p class="eyebrow">The Problem</p></div>
         <h2 class="cs-headline">Every evaluation started from zero</h2>
         <div class="cs-numbered-list cs-reveal">
           <div class="numbered-item">
@@ -211,10 +251,10 @@
   </section>
 
   <!-- 03 - Research -->
-  <section class="cs-section">
+  <section class="cs-section" id="research" data-nav="research">
     <div class="cs-section-inner">
-      <div class="cs-section-label"><p class="eyebrow">03 - Research</p></div>
       <div>
+        <div class="cs-section-label"><p class="eyebrow">Research</p></div>
         <h2 class="cs-headline">Two evaluator profiles, at opposite ends of experience</h2>
         <div class="cs-body cs-reveal">
           <p>Remote interviews with practitioners at different experience levels surfaced two clear profiles to design the workflow around.</p>
@@ -236,10 +276,10 @@
   </section>
 
   <!-- 04 - How It Works -->
-  <section class="cs-section">
+  <section class="cs-section" id="how-it-works" data-nav="how-it-works">
     <div class="cs-section-inner">
-      <div class="cs-section-label"><p class="eyebrow">04 - How It Works</p></div>
       <div>
+        <div class="cs-section-label"><p class="eyebrow">How It Works</p></div>
         <h2 class="cs-headline">A path that won't let you skip a step</h2>
         <div class="cs-numbered-list cs-reveal">
           <div class="numbered-item">
@@ -272,34 +312,44 @@
           </div>
         </div>
         <p class="cs-closing-note cs-reveal">A lighter-weight "General Comments" tab sits alongside the guided evaluation, for feedback that doesn't need a full heuristic pass: add the screens, write free-form comments, and generate the same report.</p>
-        <div class="cs-reveal" style="margin-top: var(--sp-8);">
-          <button class="p-view" type="button" data-title="Evaluation and General Comments User Flow" data-img="assets/images/case-studies/ux-assessment-tool/user-flow.png" data-lightbox-group="user-flow">See the Evaluation and General Comments flow diagram<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="cs-gallery cs-reveal" style="margin-top: var(--sp-8);">
+          <figure class="cs-gallery-item">
+            <img src="assets/images/case-studies/ux-assessment-tool/user-flow.png" alt="Evaluation and General Comments User Flow">
+            <figcaption>Evaluation and General Comments User Flow</figcaption>
+          </figure>
         </div>
       </div>
     </div>
   </section>
 
   <!-- 05 - Wireframes -->
-  <section class="cs-section">
+  <section class="cs-section" id="wireframes" data-nav="wireframes">
     <div class="cs-section-inner">
-      <div class="cs-section-label"><p class="eyebrow">05 - Wireframes</p></div>
       <div>
+        <div class="cs-section-label"><p class="eyebrow">Wireframes</p></div>
         <h2 class="cs-headline">Low-fidelity first, to pressure-test the workflow</h2>
         <div class="cs-body cs-reveal" style="margin-bottom: var(--sp-8);">
           <p>The activity dashboard, the guided evaluation screen, and the generated report - wireframed early to validate the structure before any visual design.</p>
         </div>
-        <div class="cs-reveal">
-          <button class="p-view" type="button" data-title="Wireframes" data-lightbox-group="wireframes" data-images='[{"title":"My Evaluations - Home (Wireframe)","img":"assets/images/case-studies/ux-assessment-tool/wire-home.png"},{"title":"Guided Evaluation (Wireframe)","img":"assets/images/case-studies/ux-assessment-tool/wire-evaluation.png"}]'>See the wireframes for the home and evaluation screens<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="cs-gallery cs-reveal">
+          <figure class="cs-gallery-item">
+            <img src="assets/images/case-studies/ux-assessment-tool/wire-home.png" alt="My Evaluations - Home (Wireframe)">
+            <figcaption>My Evaluations - Home (Wireframe)</figcaption>
+          </figure>
+          <figure class="cs-gallery-item">
+            <img src="assets/images/case-studies/ux-assessment-tool/wire-evaluation.png" alt="Guided Evaluation (Wireframe)">
+            <figcaption>Guided Evaluation (Wireframe)</figcaption>
+          </figure>
         </div>
       </div>
     </div>
   </section>
 
   <!-- 06 - Usability Testing -->
-  <section class="cs-section">
+  <section class="cs-section" id="usability-testing" data-nav="usability-testing">
     <div class="cs-section-inner">
-      <div class="cs-section-label"><p class="eyebrow">06 - Usability Testing</p></div>
       <div>
+        <div class="cs-section-label"><p class="eyebrow">Usability Testing</p></div>
         <h2 class="cs-headline">Testing the guided workflow with real evaluators</h2>
         <div class="cs-stat-row cs-reveal" style="grid-template-columns: repeat(2, 1fr); max-width: 560px;">
           <div class="cs-stat"><div class="stat-num" data-count-to="18" data-suffix="">0</div><div class="stat-label">Participants, across 5 locations</div></div>
@@ -308,37 +358,54 @@
         <div class="cs-body cs-reveal" style="margin-top: var(--sp-8);">
           <p>18 practitioners worked through the same 7 core tasks - from creating a new evaluation through to finding and downloading the finished report - each rated on a four-point outcome scale (with ease, with difficulty, with help, failed), alongside a severity breakdown of every finding raised along the way.</p>
         </div>
-        <div class="cs-reveal" style="margin-top: var(--sp-8);">
-          <button class="p-view" type="button" data-title="Usability Testing Results" data-img="assets/images/case-studies/ux-assessment-tool/usability-testing-results.png" data-lightbox-group="usability-testing">See the full severity breakdown and per-task success rates<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="cs-gallery cs-reveal" style="margin-top: var(--sp-8);">
+          <figure class="cs-gallery-item">
+            <img src="assets/images/case-studies/ux-assessment-tool/usability-testing-results.png" alt="Usability Testing Results">
+            <figcaption>Usability Testing Results</figcaption>
+          </figure>
         </div>
       </div>
     </div>
   </section>
 
   <!-- 07 - A/B Testing -->
-  <section class="cs-section">
+  <section class="cs-section" id="ab-testing" data-nav="ab-testing">
     <div class="cs-section-inner">
-      <div class="cs-section-label"><p class="eyebrow">07 - A/B Testing</p></div>
       <div>
+        <div class="cs-section-label"><p class="eyebrow">A/B Testing</p></div>
         <h2 class="cs-headline">Two directions for the home screen, tested side by side</h2>
         <div class="cs-body cs-reveal" style="margin-bottom: var(--sp-8);">
           <p>Two variants of the My Activities home screen were put in front of evaluators to settle open layout questions before locking the visual design.</p>
         </div>
-        <div class="cs-reveal">
-          <button class="p-view" type="button" data-title="A/B Testing - Home Screen Variants" data-img="assets/images/case-studies/ux-assessment-tool/ab-comparison.png" data-lightbox-group="ab-testing">See Variant A and Variant B compared side by side<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="cs-gallery cs-reveal">
+          <figure class="cs-gallery-item">
+            <img src="assets/images/case-studies/ux-assessment-tool/ab-comparison.png" alt="A/B Testing - Home Screen Variants">
+            <figcaption>A/B Testing - Home Screen Variants</figcaption>
+          </figure>
         </div>
       </div>
     </div>
   </section>
 
   <!-- 08 - Visual Design -->
-  <section class="cs-section">
+  <section class="cs-section" id="visual-design" data-nav="visual-design">
     <div class="cs-section-inner">
-      <div class="cs-section-label"><p class="eyebrow">08 - Visual Design</p></div>
       <div>
+        <div class="cs-section-label"><p class="eyebrow">Visual Design</p></div>
         <h2 class="cs-headline">From wireframe to a finished, on-brand tool</h2>
-        <div class="cs-reveal">
-          <button class="p-view" type="button" data-title="Visual Design" data-lightbox-group="visual-design" data-images='[{"title":"My Activities - Home","img":"assets/images/case-studies/ux-assessment-tool/visual-home.png"},{"title":"Guided Evaluation","img":"assets/images/case-studies/ux-assessment-tool/visual-evaluation.png"},{"title":"Report","img":"assets/images/case-studies/ux-assessment-tool/visual-report.png"}]'>See the finished home, evaluation, and report screens<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="cs-gallery cs-reveal">
+          <figure class="cs-gallery-item">
+            <img src="assets/images/case-studies/ux-assessment-tool/visual-home.png" alt="My Activities - Home">
+            <figcaption>My Activities - Home</figcaption>
+          </figure>
+          <figure class="cs-gallery-item">
+            <img src="assets/images/case-studies/ux-assessment-tool/visual-evaluation.png" alt="Guided Evaluation">
+            <figcaption>Guided Evaluation</figcaption>
+          </figure>
+          <figure class="cs-gallery-item">
+            <img src="assets/images/case-studies/ux-assessment-tool/visual-report.png" alt="Report">
+            <figcaption>Report</figcaption>
+          </figure>
         </div>
         <p class="cs-closing-note cs-reveal">The report screen carries an Overall Score gauge, a per-category (%) breakdown across all 8 heuristic categories, and a VIMM Impact read-out - rating every finding's Visual, Intellect, Motor, and Memory load at a glance.</p>
       </div>
@@ -346,26 +413,53 @@
   </section>
 
   <!-- 09 - Style Guide -->
-  <section class="cs-section">
+  <section class="cs-section" id="style-guide" data-nav="style-guide">
     <div class="cs-section-inner">
-      <div class="cs-section-label"><p class="eyebrow">09 - Style Guide</p></div>
       <div>
+        <div class="cs-section-label"><p class="eyebrow">Style Guide</p></div>
         <h2 class="cs-headline">Built from a single base color, then documented as it grew</h2>
         <div class="cs-body cs-reveal" style="margin-bottom: var(--sp-8);">
           <p>The project started with only one base color provided. Everything else - the Midnight Blue and white pairing, a teal accent system for calls to action, typography (Gellix, three heading weights), and every button, form control, and icon in the tool - was built out from there, then documented so the tool stayed heuristically consistent with itself.</p>
         </div>
-        <div class="cs-reveal">
-          <button class="p-view" type="button" data-title="Style Guide" data-lightbox-group="style-guide" data-images='[{"title":"Typography Guidelines","img":"assets/images/case-studies/ux-assessment-tool/style-typography-guidelines.png"},{"title":"Primary Colors","img":"assets/images/case-studies/ux-assessment-tool/style-primary-colors.png"},{"title":"Secondary Colors &amp; Grayscale","img":"assets/images/case-studies/ux-assessment-tool/style-secondary-colors.png"},{"title":"Backgrounds","img":"assets/images/case-studies/ux-assessment-tool/style-backgrounds.png"},{"title":"Text Styles","img":"assets/images/case-studies/ux-assessment-tool/style-text-styles.png"},{"title":"Buttons &amp; Form Controls","img":"assets/images/case-studies/ux-assessment-tool/style-buttons.png"},{"title":"Icons","img":"assets/images/case-studies/ux-assessment-tool/style-icons.png"}]'>See the full style guide - colors, type, buttons, and icons<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="cs-gallery cs-reveal">
+          <figure class="cs-gallery-item">
+            <img src="assets/images/case-studies/ux-assessment-tool/style-typography-guidelines.png" alt="Typography Guidelines">
+            <figcaption>Typography Guidelines</figcaption>
+          </figure>
+          <figure class="cs-gallery-item">
+            <img src="assets/images/case-studies/ux-assessment-tool/style-primary-colors.png" alt="Primary Colors">
+            <figcaption>Primary Colors</figcaption>
+          </figure>
+          <figure class="cs-gallery-item">
+            <img src="assets/images/case-studies/ux-assessment-tool/style-secondary-colors.png" alt="Secondary Colors &amp; Grayscale">
+            <figcaption>Secondary Colors &amp; Grayscale</figcaption>
+          </figure>
+          <figure class="cs-gallery-item">
+            <img src="assets/images/case-studies/ux-assessment-tool/style-backgrounds.png" alt="Backgrounds">
+            <figcaption>Backgrounds</figcaption>
+          </figure>
+          <figure class="cs-gallery-item">
+            <img src="assets/images/case-studies/ux-assessment-tool/style-text-styles.png" alt="Text Styles">
+            <figcaption>Text Styles</figcaption>
+          </figure>
+          <figure class="cs-gallery-item">
+            <img src="assets/images/case-studies/ux-assessment-tool/style-buttons.png" alt="Buttons &amp; Form Controls">
+            <figcaption>Buttons &amp; Form Controls</figcaption>
+          </figure>
+          <figure class="cs-gallery-item">
+            <img src="assets/images/case-studies/ux-assessment-tool/style-icons.png" alt="Icons">
+            <figcaption>Icons</figcaption>
+          </figure>
         </div>
       </div>
     </div>
   </section>
 
   <!-- 10 - Reflection -->
-  <section class="cs-section">
+  <section class="cs-section" id="reflection" data-nav="reflection">
     <div class="cs-section-inner">
-      <div class="cs-section-label"><p class="eyebrow">10 - Reflection</p></div>
       <div>
+        <div class="cs-section-label"><p class="eyebrow">Reflection</p></div>
         <h2 class="cs-headline">What this project reinforced for me</h2>
         <div class="cs-reflect-grid cs-reveal">
           <div class="reflect-card">
@@ -412,25 +506,7 @@
     </a>
   </div>
 
-</main>
-
-<!-- Lightbox - click-to-expand viewer, shared by Wireframes / Visual Design /
-     Usability Testing / A/B Testing. Matches the .p-view + light-card-modal
-     pattern from the Next Gen Contact Center presentation deck. Each
-     .p-view button carries data-title/data-img/data-lightbox-group; prev/next
-     in the footer cycles through every button sharing that group, in DOM order. -->
-<div class="lightbox" id="cs-lightbox" aria-hidden="true">
-  <div class="lightbox-backdrop" data-lightbox-close></div>
-  <div class="lightbox-panel" role="dialog" aria-modal="true" aria-labelledby="cs-lightbox-title">
-    <div class="lightbox-head">
-      <h3 id="cs-lightbox-title"></h3>
-      <button class="lightbox-close" type="button" data-lightbox-close aria-label="Close"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-    </div>
-    <div class="lightbox-body">
-      <img src="" alt="">
-    </div>
-    <div class="lightbox-foot"></div>
-  </div>
+  </main>
 </div>
 
 <footer class="site-footer">
@@ -447,94 +523,50 @@
 <script src="assets/js/case-study.js"></script>
 <script>
 (function () {
-  var lb = document.getElementById('cs-lightbox');
-  if (!lb) return;
-  var titleEl = lb.querySelector('.lightbox-head h3');
-  var bodyImg = lb.querySelector('.lightbox-body img');
-  var footEl = lb.querySelector('.lightbox-foot');
-
-  var ARROW_LEFT = '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-  var ARROW_RIGHT = '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-
-  var currentList = [];
-  var currentIndex = 0;
-
-  function readList(btn) {
-    var raw = btn.getAttribute('data-images');
-    if (raw) {
-      try {
-        var parsed = JSON.parse(raw);
-        if (parsed && parsed.length) return parsed;
-      } catch (e) { /* fall through to single-image case */ }
-    }
-    return [{ title: btn.getAttribute('data-title') || '', img: btn.getAttribute('data-img') }];
+  var toggle = document.querySelector('.nav-toggle');
+  var rail = document.getElementById('rail');
+  var backdrop = document.querySelector('.rail-backdrop');
+  if (!toggle || !rail || !backdrop) return;
+  function openNav(){
+    rail.classList.add('is-open');
+    backdrop.classList.add('is-open');
+    toggle.classList.add('is-open');
+    toggle.setAttribute('aria-expanded', 'true');
+    toggle.setAttribute('aria-label', 'Close menu');
   }
-
-  function renderFoot() {
-    if (currentList.length < 2) { footEl.innerHTML = ''; return; }
-    var dots = currentList.map(function (c, i) {
-      return '<button class="concept-nav-dot' + (i === currentIndex ? ' is-active' : '') + '" type="button" data-nav-dot="' + i + '" aria-label="Go to ' + c.title + '"></button>';
-    }).join('');
-    footEl.innerHTML = '<div class="concept-nav">' +
-      '<button class="concept-nav-arrow" type="button" data-nav="prev" aria-label="Previous image">' + ARROW_LEFT + '</button>' +
-      '<div class="concept-nav-dots">' + dots + '</div>' +
-      '<button class="concept-nav-arrow" type="button" data-nav="next" aria-label="Next image">' + ARROW_RIGHT + '</button>' +
-      '</div>';
+  function closeNav(){
+    rail.classList.remove('is-open');
+    backdrop.classList.remove('is-open');
+    toggle.classList.remove('is-open');
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-label', 'Open menu');
   }
-
-  function render() {
-    var item = currentList[currentIndex];
-    if (!item) return;
-    titleEl.textContent = item.title;
-    bodyImg.src = item.img;
-    bodyImg.alt = item.title;
-    renderFoot();
-  }
-
-  function open(list, index) {
-    currentList = list;
-    currentIndex = index < 0 ? 0 : index;
-    render();
-    lb.classList.add('is-open');
-    lb.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function close() {
-    lb.classList.remove('is-open');
-    lb.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
-  }
-
-  function step(delta) {
-    if (!currentList.length) return;
-    currentIndex = (currentIndex + delta + currentList.length) % currentList.length;
-    render();
-  }
-
-  document.querySelectorAll('.p-view').forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      open(readList(btn), 0);
-    });
+  toggle.addEventListener('click', function(){
+    if (rail.classList.contains('is-open')) { closeNav(); } else { openNav(); }
   });
-
-  footEl.addEventListener('click', function (e) {
-    var navBtn = e.target.closest('[data-nav]');
-    if (navBtn) { step(navBtn.getAttribute('data-nav') === 'next' ? 1 : -1); return; }
-    var dotBtn = e.target.closest('[data-nav-dot]');
-    if (dotBtn) { currentIndex = parseInt(dotBtn.getAttribute('data-nav-dot'), 10); render(); }
-  });
-
-  lb.querySelectorAll('[data-lightbox-close]').forEach(function (el) {
-    el.addEventListener('click', close);
-  });
-  document.addEventListener('keydown', function (e) {
-    if (!lb.classList.contains('is-open')) return;
-    if (e.key === 'Escape') close();
-    if (e.key === 'ArrowLeft') step(-1);
-    if (e.key === 'ArrowRight') step(1);
+  backdrop.addEventListener('click', closeNav);
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeNav(); });
+  Array.prototype.slice.call(rail.querySelectorAll('.rail-agenda a')).forEach(function(a){
+    a.addEventListener('click', closeNav);
   });
 })();
+
+(function () {
+  var links = Array.prototype.slice.call(document.querySelectorAll('.rail-agenda a'));
+  if (!links.length) return;
+  var sections = links.map(function (l) { return document.getElementById(l.dataset.target); });
+
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        var id = entry.target.id;
+        links.forEach(function (l) { l.classList.toggle('is-active', l.dataset.target === id); });
+      }
+    });
+  }, { root: null, rootMargin: '-50% 0px -50% 0px', threshold: 0 });
+  sections.forEach(function (s) { if (s) io.observe(s); });
+})();
 </script>
+
 </body>
 </html>

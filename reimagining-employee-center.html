@@ -106,7 +106,7 @@
   .rail-agenda a {
     display: block;
     padding: 8px var(--sp-3);
-    border-radius: var(--r-sm);
+    border-radius: 12px;
     text-decoration: none; color: var(--text-secondary);
     font-size: var(--fs-small); font-weight: 500;
     transition: background var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
@@ -135,11 +135,11 @@
 
   /* Section mini-header: numbers removed from the eyebrow text (was "01 · Overview"),
      and bumped from the shared --fs-micro (0.75rem) up to 1rem to match case 1's deck. */
-  .cs-section-label .eyebrow { font-size: 1rem; }
+  .cs-section-label .eyebrow { font-size: 1rem; font-weight: 700; }
   .cs-section-inner { grid-template-columns: 1fr; }
-  .cs-section-label { position: static; margin-bottom: var(--sp-5); }
+  .cs-section-label { position: static; margin-bottom: 0; }
 
-  @media (max-width: 900px) {
+  @media (max-width: 1000px) {
     .mobile-bar { display: flex; }
     .shell { grid-template-columns: 1fr; }
     .rail {
